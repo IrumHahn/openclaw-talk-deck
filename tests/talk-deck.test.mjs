@@ -19,8 +19,9 @@ test('5 themes render a full deck with all 12 slides', () => {
     const html = renderDeck(example, key)
     assert.match(html, /^<!doctype html>/)
     assert.match(html, /pretendard/i)
-    assert.equal((html.match(/<section class="slide/g) || []).length, 12)
+    assert.equal((html.match(/<section class="slide/g) || []).length, 16)
     assert.ok(!/<script src=/i.test(html), 'no external scripts (basecamp CSP)')
+    assert.match(html, /cdn\.jsdelivr\.net\/gh\/IrumHahn\/openclaw-virtual-office@main\/web\/bg\/diorama\.jpg/)
     assert.ok(!/localStorage|document\.cookie|fetch\(/.test(html), 'no storage or network in deck runtime')
   }
 })
@@ -101,4 +102,31 @@ test('publish reads the plaza skill env file', () => {
   const r = spawnSync('node', [path.join(scripts, 'publish.mjs'), '--deck', deck, '--title', 't', '--base', 'http://127.0.0.1:9'], { encoding: 'utf8', env: { ...process.env, RUN_ACADEMY_PLAZA_TOKEN: '', HOME: home } })
   assert.equal(r.status, 3)
   assert.ok(!r.stderr.includes('rap_s4_0123'), 'token never printed')
+})
+
+test('office scene seats the coordinator on the leader seat and draws planned seats as ghosts', async () => {
+  const { officeScene } = await import('../skill/talk-deck/scripts/lib/render.mjs')
+  const html = officeScene({ template: 'rpg', agents: [{ name: '다온', sprite: 'laptop' }, { name: '봄이', sprite: 'star', coordinator: true }], planned: [{ title: '연락', sprite: 'nope' }] })
+  assert.ok(html.includes('chars/pixel/star-'), 'leader uses its sprite')
+  assert.ok(html.includes('image-rendering:pixelated'))
+  assert.equal((html.match(/vo-actor ghost/g) || []).length, 1)
+  assert.ok(html.includes('chars/pixel/coffee-'), 'unknown sprite falls back to coffee')
+  assert.equal(officeScene({ template: 'nope', agents: [] }), '')
+})
+
+test('collect drafts the office from virtual-office/org.json and detects the template', async () => {
+  const { draftOffice, officeTemplateOf } = await import('../skill/talk-deck/scripts/collect.mjs')
+  assert.equal(officeTemplateOf('<div style="background:url(https://x/web/bg/control.jpg)">'), 'control')
+  const o = draftOffice({ agents: [{ name: '봄이', role: '총괄', sprite: 'star', coordinator: true }], planned: [{ title: '연락 담당', reason: 'r', sprite: 'coffee' }] }, 'bg/building.jpg')
+  assert.equal(o.template, 'building')
+  assert.equal(o.agents[0].coordinator, true)
+  assert.equal(o.planned[0].title, '연락 담당')
+})
+
+test('new story slides appear in order and stay out when empty', () => {
+  const keys = buildSlides(example).map(s => s.match(/data-key="([^"]+)"/)[1])
+  assert.deepEqual(keys.slice(0, 3), ['cover', 'agenda', 'motivation'])
+  assert.deepEqual(keys.slice(-5), ['office', 'feelings', 'goal', 'pledge', 'closing'])
+  const bare = buildSlides({ ...example, motivation: {}, goal: {}, pledge: {}, office: {} }).map(s => s.match(/data-key="([^"]+)"/)[1])
+  assert.ok(!bare.some(k => ['motivation', 'goal', 'pledge', 'office'].includes(k)))
 })

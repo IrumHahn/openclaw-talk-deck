@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 1주차 재료를 찾아 발표 초안(talk.json)을 만든다. 사람만 답할 수 있는 칸은 비워 두고 ask 목록으로 알려 준다.
 //   node collect.mjs [--root <dir> ...] [--out talk/talk.json] [--week 1]
-// 찾는 것: my-work-map.md · team.json · team.md · 대시보드 config.json/seed.json · USER.md
+// 찾는 것: my-work-map.md · team.json · team.md · 대시보드 config.json/seed.json · USER.md · 가상 오피스 virtual-office/org.json·office.html
 // 기본 탐색 위치: $OPENCLAW_WORKSPACE, ~/.openclaw/workspace, /data/.openclaw/workspace, ~/.openclaw (깊이 4)
 import fs from 'node:fs'
 import os from 'node:os'
@@ -30,7 +30,7 @@ function parseArgs(argv) {
 
 export function findFiles(roots, maxDepth = 4) {
   const hits = {}
-  const want = new Set(['my-work-map.md', 'team.json', 'team.md', 'config.json', 'seed.json', 'USER.md'])
+  const want = new Set(['my-work-map.md', 'team.json', 'team.md', 'config.json', 'seed.json', 'USER.md', 'org.json', 'office.html', 'widget.html'])
   const seen = new Set()
   function walk(dir, depth) {
     let real
@@ -44,6 +44,7 @@ export function findFiles(roots, maxDepth = 4) {
       if (e.isDirectory()) { if (!SKIP.has(e.name) && !e.name.startsWith('.') ) walk(p, depth + 1); continue }
       if (!want.has(e.name)) continue
       if ((e.name === 'config.json' || e.name === 'seed.json') && path.basename(dir) !== 'dashboard') continue
+      if (['org.json', 'office.html', 'widget.html'].includes(e.name) && path.basename(dir) !== 'virtual-office') continue
       let mtime = 0
       try { mtime = fs.statSync(p).mtimeMs } catch { continue }
       ;(hits[e.name] ||= []).push({ path: p, mtime })
@@ -51,7 +52,7 @@ export function findFiles(roots, maxDepth = 4) {
   }
   for (const r of roots) if (r && fs.existsSync(r)) walk(r, 0)
   const pick = name => (hits[name] || []).sort((a, b) => b.mtime - a.mtime)[0]?.path || null
-  return { workMap: pick('my-work-map.md'), teamJson: pick('team.json'), teamMd: pick('team.md'), dashConfig: pick('config.json'), dashSeed: pick('seed.json'), user: pick('USER.md') }
+  return { workMap: pick('my-work-map.md'), teamJson: pick('team.json'), teamMd: pick('team.md'), dashConfig: pick('config.json'), dashSeed: pick('seed.json'), user: pick('USER.md'), officeOrg: pick('org.json'), officeHtml: pick('office.html') || pick('widget.html') }
 }
 
 const readText = file => { try { return file ? fs.readFileSync(file, 'utf8') : '' } catch { return '' } }
@@ -117,6 +118,21 @@ export function dashboardMini(config, seed, agentNames = {}) {
   return { name: config.name || '내 AI 오피스', emoji: config.theme?.emoji || '', tagline: config.theme?.tagline || '', groups, tiles, widget }
 }
 
+// 가상 오피스 템플릿은 office.html 이 읽는 배경 그림으로 알아낸다.
+const OFFICE_BG = { 'bg/diorama.jpg': 'diorama', 'bg/saas.jpg': 'saas', 'bg/pixel.png': 'rpg', 'bg/control.jpg': 'control', 'bg/building.jpg': 'building' }
+export function officeTemplateOf(html) {
+  for (const [bg, key] of Object.entries(OFFICE_BG)) if (String(html || '').includes(bg)) return key
+  return ''
+}
+export function draftOffice(org, html) {
+  if (!org || !Array.isArray(org.agents)) return null
+  return {
+    headline: '', why: '', screenshot: null, template: officeTemplateOf(html),
+    agents: org.agents.map(a => ({ name: a.name, role: a.role || '', sprite: a.sprite || 'coffee', coordinator: a.coordinator === true })),
+    planned: (org.planned || []).map(p => ({ title: p.title, reason: p.reason || '', sprite: p.sprite || 'coffee' })),
+  }
+}
+
 export function draftTalk({ files, week = 1, today = new Date() }) {
   const team = readJson(files.teamJson)
   const agents = Array.isArray(team?.agents) ? team.agents : []
@@ -130,6 +146,7 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
   const userMd = readText(files.user)
   const userName = wm.userName || (userMd.match(/(?:이름|Name|호칭)\s*[:：]\s*([^\n]+)/i) || [])[1]?.trim() || ''
   const customs = Array.isArray(config?.customMenus) ? config.customMenus : []
+  const officeDraft = draftOffice(readJson(files.officeOrg), readText(files.officeHtml))
   const callouts = []
   if (customs.length) callouts.push({ title: '내 업무 메뉴', text: `${customs.map(m => `"${m.label}"`).join(', ')} — 왜 이 이름으로 지었나요? (내 말로 한 줄)` })
   if (config?.widget || mini?.widget) callouts.push({ title: '나의 위젯', text: `알고 싶은 숫자: ${mini?.widget?.bigLabel || '(?)'}\n보고 할 행동: (?)` })
@@ -139,6 +156,7 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
     date: new Date(today.getTime() + 86400000).toISOString().slice(0, 10),
     title: '', subtitle: '',
     presenter: { name: userName, about: team?.team?.organization || '' },
+    motivation: { headline: '', why: '' },
     workMap: { headline: '', rows: wm.rows.slice(0, 5).map(r => ({ ...r, owner: '' })), never: wm.never },
     structure: { headline: '', me: '방향 정하고 승인', coordinator: lead ? { name: lead.name, role: lead.mission || lead.role, emoji: lead.emoji || '' } : {}, specialists: specs.map(a => ({ name: a.name, role: a.mission || a.role, emoji: a.emoji || '' })), base: '바탕: 내 VPS(오픈클로) · 내 PC(노드 연결) · HIA 기록', permissions: { auto: [], approve: [], never: [] } },
     members: { headline: '', list: agents.map(a => ({ name: a.name, emoji: a.emoji || '', kind: a === lead ? '총괄' : '전문가', role: a.role || '', relation: '', tone: '', dislike: '', firstTask: a.firstTasks?.[0]?.task || '' })) },
@@ -147,7 +165,10 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
     dashboard: { headline: '', screenshot: null, mini, callouts },
     review: { headline: '', good: [], bad: [] },
     futureDashboard: { headline: '', rows: [], widgetNext: '' },
+    office: officeDraft || { headline: '', template: '', agents: [], planned: [] },
     feelings: { headline: '', stuck: '', surprise: '', nextWeek: '' },
+    goal: { headline: '', items: [] },
+    pledge: { pledges: [], declaration: '' },
     closing: { line: '감사합니다', ask: '' },
     notes: {},
   }
@@ -164,7 +185,13 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
   ask.push('dashboard.callouts — "왜 이 이름" "위젯 보고 할 행동"은 사람 말로')
   ask.push('review.good/bad — 며칠 써 본 좋았던 점·아쉬운 점 각 2~3개(사람에게 묻기)')
   ask.push('futureDashboard.rows — 다음에 채울 메뉴 2~4개(언제·누가)')
+  ask.push('motivation — 이 과정에 참여한 동기 한 문장 + 계기 한 줄 (사람 말 그대로)')
   ask.push('feelings.* — 소감 한 문장 + 막힌 곳·놀란 순간·다음 주에 맡길 일 (반드시 사람 말 그대로)')
+  ask.push('goal — 한 달 뒤 완성하고 싶은 것 한 문장 + 구체적인 결과물 2~3개 (사람 말 그대로)')
+  ask.push('pledge — 그걸 위한 한 달 동안의 다짐 2~3개 + 선언 한 문장 (사람 말 그대로)')
+  if (!officeDraft) ask.push('office — 가상 오피스(virtual-office/org.json)를 못 찾음: 만들었다면 캡처를 받고, 아니면 이 장은 빠진다')
+  else if (!officeDraft.template) ask.push('office.template — office.html 에서 템플릿을 못 알아냄: diorama·saas·rpg·control·building 중 무엇인지 묻기')
+  else ask.push('office.why — 이 템플릿을 고른 이유 한 줄 (사람에게 묻기)')
   ask.push('theme — paper·midnight·botanical·pop·minimal 중 선택')
   return { talk, ask }
 }
@@ -176,7 +203,7 @@ function main() {
   fs.mkdirSync(path.dirname(o.out), { recursive: true })
   if (fs.existsSync(o.out)) fs.copyFileSync(o.out, `${o.out}.bak-${Date.now()}`)
   fs.writeFileSync(o.out, `${JSON.stringify(talk, null, 2)}\n`, 'utf8')
-  console.log(JSON.stringify({ ok: true, out: o.out, found: files, counts: { workMapRows: talk.workMap.rows.length, members: talk.members.list.length, dashboard: Boolean(talk.dashboard.mini) }, ask }, null, 2))
+  console.log(JSON.stringify({ ok: true, out: o.out, found: files, counts: { workMapRows: talk.workMap.rows.length, members: talk.members.list.length, dashboard: Boolean(talk.dashboard.mini), office: talk.office.template || (talk.office.agents.length ? '(template?)' : null) }, ask }, null, 2))
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) main()

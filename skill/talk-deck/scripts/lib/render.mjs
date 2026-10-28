@@ -2,6 +2,7 @@
 // 슬라이드는 1920×1080 캔버스를 화면 크기에 맞춰 줄인다. ←/→ 넘기기, F 전체화면, N 발표자 노트.
 // 모든 글은 이스케이프한다(수강생 글이 HTML 로 해석되지 않게). 내용이 비어 있는 장은 자동으로 뺀다.
 import { THEMES, PRETENDARD, BODY_FONT } from './themes.mjs'
+import { OFFICE_TEMPLATES, OFFICE_CDN } from './offices.mjs'
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]))
 const has = value => Array.isArray(value) ? value.some(has) : value !== undefined && value !== null && String(value).trim() !== ''
@@ -24,7 +25,7 @@ function cover(t) {
 }
 
 function agenda(sections) {
-  return `${head('발표 순서', '오늘 이야기할 네 가지')}<div class="agenda">${sections.map((s, i) => `<div class="card agenda-item"><p class="num">${i + 1}</p><h3>${esc(s.title)}</h3><p class="muted">${esc(s.desc)}</p></div>`).join('')}</div>`
+  return `${head('발표 순서', `오늘 이야기할 ${['', '한', '두', '세', '네', '다섯', '여섯'][sections.length] || sections.length} 가지`)}<div class="agenda" style="grid-template-columns:repeat(${Math.min(sections.length, 3)},1fr)">${sections.map((s, i) => `<div class="card agenda-item"><p class="num">${i + 1}</p><h3>${esc(s.title)}</h3><p class="muted">${esc(s.desc)}</p></div>`).join('')}</div>`
 }
 
 function workMap(w) {
@@ -126,6 +127,57 @@ function closing(c, t) {
   return `<div class="close"><h2 class="cover-title">${lines(c.line || '감사합니다')}</h2>${has(c.ask) ? `<p class="cover-sub">${lines(c.ask)}</p>` : ''}<p class="muted">${esc(t.presenter?.name || '')}</p></div>`
 }
 
+
+function motivation(m) {
+  return `<header class="hd"><p class="eyebrow">참여 동기</p></header><div class="quote-wrap"><p class="qmark">“</p><h2 class="title big-quote">${lines(m.headline)}</h2>${has(m.why) ? `<p class="qwhy">${lines(m.why)}</p>` : ''}</div>`
+}
+
+function goal(g) {
+  const items = (g.items || []).slice(0, 4)
+  return `${head('한 달 뒤 완성하고 싶은 것', g.headline)}${items.length ? `<div class="goals" style="grid-template-columns:repeat(${items.length},1fr)">${items.map((x, i) => `<div class="card goal"><p class="gnum">${String(i + 1).padStart(2, '0')}</p><p>${lines(x)}</p></div>`).join('')}</div>` : ''}`
+}
+
+function pledge(p, t) {
+  const list = (p.pledges || []).slice(0, 4)
+  return `<header class="hd"><p class="eyebrow">다짐과 선언</p></header><div class="pledge">${list.length ? `<ol class="plist">${list.map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}<h2 class="declare">${lines(p.declaration)}</h2><div class="sign"><span>${esc(p.name || t.presenter?.name || '')}</span><i></i><span>${esc(p.date || t.date || '')}</span></div></div>`
+}
+
+// 가상 오피스: 키트 CDN 배경 + 캐릭터를 엔진과 같은 규칙으로 자리에 앉힌 정지 화면.
+// 자리: 총괄 → leader 자리, 나머지 직원 → 남은 자리 순서, 채용 예정 → 그다음(반투명 + 점선 태그).
+export function officeScene(o, width = 1180) {
+  const T = OFFICE_TEMPLATES[o.template]
+  if (!T) return ''
+  const height = Math.round(width * 941 / 1672)
+  const seats = T.seats.map(([x, y, view, leader]) => ({ x, y, view, leader }))
+  const leaderSeat = seats.find(s => s.leader) || seats[0]
+  const rest = seats.filter(s => s !== leaderSeat)
+  const agents = [...(o.agents || [])].sort((a, b) => (b.coordinator === true) - (a.coordinator === true))
+  const placed = []
+  agents.forEach((a, i) => { const seat = i === 0 ? leaderSeat : rest.shift(); if (seat) placed.push({ a, seat, ghost: false }) })
+  ;(o.planned || []).forEach(p => { const seat = rest.shift(); if (seat) placed.push({ a: { name: `채용 예정 · ${p.title}`, sprite: p.sprite || 'coffee' }, seat, ghost: true }) })
+  const SPRITES = new Set(['star', 'chart', 'gamepad', 'pen', 'laptop', 'palette', 'lens', 'mirror', 'sprout', 'book', 'camera', 'coffee'])
+  const actors = placed.sort((p, q) => p.seat.y - q.seat.y).map(({ a, seat, ghost }) => {
+    const k = T.depth ? T.depth[0] + (T.depth[1] - T.depth[0]) * (seat.y / 100) : 1
+    const h = Math.round(width * T.scale * k)
+    const sprite = SPRITES.has(a.sprite) ? a.sprite : 'coffee'
+    const view = seat.view === 'back' ? 'back' : 'front'
+    return `<div class="vo-actor${ghost ? ' ghost' : ''}" style="left:${seat.x}%;top:${seat.y}%"><span class="vo-tag">${esc(a.name)}</span><img src="${OFFICE_CDN}${T.chars}/${sprite}-${view}.png" alt="" style="height:${h}px${T.pixel ? ';image-rendering:pixelated' : ''}"></div>`
+  }).join('')
+  return `<div class="vo-stage" style="width:${width}px;height:${height}px;background-image:url('${OFFICE_CDN}${T.bg}')">${actors}</div>`
+}
+
+function office(o) {
+  const T = OFFICE_TEMPLATES[o.template]
+  const visual = has(o.screenshot) ? `<img class="shot" src="${esc(o.screenshot)}" alt="가상 오피스 화면 캡처">` : officeScene(o)
+  const team = (o.agents || []).slice(0, 6)
+  const planned = (o.planned || []).slice(0, 3)
+  return `${head('가상 오피스', o.headline || '우리 팀이 일하는 사무실')}<div class="row dash-row">${visual}<div class="callouts vo-side">
+<div><p class="callout-t">${esc(T ? T.label : '내 사무실')}</p>${has(o.why) ? `<p class="muted">${lines(o.why)}</p>` : ''}</div>
+${team.length ? `<div><p class="callout-t">지금 일하는 팀</p><p class="muted">${team.map(a => esc(a.name) + (a.role ? ` · ${esc(a.role)}` : '')).join('<br>')}</p></div>` : ''}
+${planned.length ? `<div><p class="callout-t">다음에 앉힐 사람</p><p class="muted">${planned.map(p => esc(p.title) + (p.reason ? ` — ${esc(p.reason)}` : '')).join('<br>')}</p></div>` : ''}
+</div></div>`
+}
+
 // ---------- 조립 ----------
 
 export function buildSlides(t) {
@@ -133,13 +185,16 @@ export function buildSlides(t) {
   const out = []
   const sections = []
   const add = (key, cls, body) => out.push(slide(key, cls, body, notes[key]))
+  if (has(t.motivation?.headline)) sections.push({ title: '참여 동기', desc: '왜 이 과정에 왔나' })
   if (has(t.workMap?.rows) || has(t.structure?.coordinator?.name)) sections.push({ title: '내가 생각하는 에이전트 팀과 구조도', desc: '업무 지도 → 왜 이런 팀인가' })
   if (has(t.members?.list)) sections.push({ title: '팀 멤버 소개 + 앞으로 만들 팀', desc: '지금의 팀 → 4주 뒤 모습' })
-  if (has(t.dashboard) || has(t.review?.good) || has(t.futureDashboard?.rows)) sections.push({ title: '대시보드 리뷰 + 앞으로 만들 대시보드', desc: '나만 가진 메뉴와 위젯' })
+  if (has(t.dashboard) || has(t.review?.good) || has(t.futureDashboard?.rows)) sections.push({ title: '대시보드 리뷰 + 앞으로 만들 대시보드', desc: has(t.office?.template) ? '나만 가진 메뉴와 위젯 · 가상 오피스' : '나만 가진 메뉴와 위젯' })
   if (has(t.feelings?.headline)) sections.push({ title: '1주차 소감', desc: '막힌 곳 · 놀란 순간 · 다음 주' })
+  if (has(t.goal?.headline) || has(t.pledge?.declaration)) sections.push({ title: '한 달 뒤의 나 + 선언', desc: '완성하고 싶은 것과 다짐' })
 
   add('cover', 's-cover dark', cover(t))
   if (sections.length > 1 && t.agenda !== false) add('agenda', 's-agenda', agenda(sections))
+  if (has(t.motivation?.headline)) add('motivation', 's-quote', motivation(t.motivation))
   if (has(t.workMap?.rows) || has(t.workMap?.never)) add('workmap', '', workMap(t.workMap))
   if (has(t.structure?.coordinator?.name)) add('structure', '', structure(t.structure))
   if (has(t.members?.list)) add('members', '', members(t.members))
@@ -148,7 +203,10 @@ export function buildSlides(t) {
   if (t.dashboard && (has(t.dashboard.screenshot) || has(t.dashboard.mini?.name) || has(t.dashboard.mini?.groups))) add('dashboard', 's-dash', dashboard(t.dashboard))
   if (has(t.review?.good) || has(t.review?.bad)) add('review', '', review(t.review))
   if (has(t.futureDashboard?.rows) || has(t.futureDashboard?.widgetNext)) add('futuredash', '', futureDash(t.futureDashboard))
+  if (has(t.office?.template) && (OFFICE_TEMPLATES[t.office.template] || has(t.office.screenshot))) add('office', 's-office', office(t.office))
   if (has(t.feelings?.headline)) add('feelings', 's-feel dark', feelings(t.feelings))
+  if (has(t.goal?.headline)) add('goal', '', goal(t.goal))
+  if (has(t.pledge?.declaration)) add('pledge', 's-pledge dark', pledge(t.pledge, t))
   if (t.closing !== false) add('closing', 's-close dark', closing(t.closing || {}, t))
   return out
 }
@@ -266,6 +324,26 @@ p,li,td,th{font-size:32px;line-height:1.5}
 .flabel{font-size:30px;font-weight:700;color:var(--accent)}
 .s-close{justify-content:center}
 .close{display:flex;flex-direction:column;gap:30px}
+.quote-wrap{display:flex;flex-direction:column;gap:30px;max-width:1500px}
+.qmark{font-family:var(--hfont);font-size:200px;line-height:.6;color:var(--accent);height:90px}
+.qwhy{font-size:36px;color:var(--muted);line-height:1.55}
+.goals{display:grid;gap:24px}
+.goal{display:flex;flex-direction:column;gap:16px;background:var(--bg2)}
+.gnum{font-size:44px;font-weight:800;color:var(--accent)}.goal p:last-child{font-size:34px;line-height:1.45}
+.s-pledge{justify-content:space-between}
+.pledge{display:flex;flex-direction:column;gap:44px;margin:auto 0}
+.plist{list-style:none;counter-reset:pl;display:flex;flex-direction:column;gap:18px}
+.plist li{counter-increment:pl;font-size:36px;line-height:1.4;display:flex;gap:22px;align-items:baseline}
+.plist li::before{content:counter(pl);flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;font-weight:800;background:var(--accent);color:var(--dark)}
+.declare{font-family:var(--hfont);font-weight:var(--hweight);font-size:78px;line-height:1.25;letter-spacing:-.01em}
+.sign{display:flex;align-items:center;gap:24px;font-size:30px}.sign i{flex:0 0 360px;height:2px;background:currentColor;opacity:.5}
+.vo-stage{position:relative;flex:none;background-size:cover;background-position:center;border-radius:14px;border:var(--border);overflow:hidden}
+.vo-actor{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.vo-actor img{display:block;width:auto;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2))}
+.vo-tag{font-size:17px;font-weight:700;line-height:1.2;white-space:nowrap;background:rgba(255,255,255,.92);color:#1d211e;padding:3px 9px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.vo-actor.ghost img{opacity:.42;filter:grayscale(.6)}
+.vo-actor.ghost .vo-tag{background:rgba(255,255,255,.75);border:1.5px dashed var(--accent);color:var(--accent)}
+.vo-side p.muted{font-size:27px}
 #ui{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:5}
 #bar{height:100%;width:0;background:${v.accent};transition:width .25s}
 #num{position:fixed;right:16px;bottom:12px;font:600 13px/1 var(--bfont);color:rgba(255,255,255,.55);background:rgba(0,0,0,.35);padding:5px 9px;border-radius:999px;z-index:5}

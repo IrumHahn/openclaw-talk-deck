@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // talk.json → 발표 HTML 한 장.
-//   node build.mjs --talk talk.json [--theme paper|midnight|botanical|pop|minimal] [--screenshot dash.png] [--out deck.html]
+//   node build.mjs --talk talk.json [--theme paper|midnight|botanical|pop|minimal] [--screenshot dash.png] [--office-screenshot office.png] [--out deck.html]
 //   node build.mjs --talk talk.json --all-themes <dir>     # 테마 5종 미리보기를 한 번에
 // 비밀값처럼 보이는 글이 있으면 만들지 않는다. 비어 있는 장은 자동으로 빠진다.
 import fs from 'node:fs'
@@ -20,16 +20,20 @@ export function validate(talk) {
   if (!String(talk?.title || '').trim()) problems.push('title 이 비어 있어요')
   if (!String(talk?.presenter?.name || '').trim()) problems.push('presenter.name 이 비어 있어요')
   if (talk?.theme && !THEME_KEYS.includes(talk.theme)) problems.push(`theme 은 ${THEME_KEYS.join(', ')} 중 하나`)
-  const text = JSON.stringify({ ...talk, dashboard: { ...(talk?.dashboard || {}), screenshot: undefined } })
+  const text = JSON.stringify({ ...talk, dashboard: { ...(talk?.dashboard || {}), screenshot: undefined }, office: { ...(talk?.office || {}), screenshot: undefined } })
   if (SECRET.test(text)) problems.push('비밀값(토큰·비밀번호)처럼 보이는 글이 있어요 — 지우고 다시 만드세요')
   if (!talk?.members?.list?.length) warnings.push('② 팀 멤버가 비어 있어요 (총괄 1명이라도 넣으세요)')
   if (!talk?.dashboard) warnings.push('③ 대시보드 장이 없어요')
   if (!String(talk?.feelings?.headline || '').trim()) warnings.push('④ 소감 한 문장이 비어 있어요 — 꼭 본인 말로 받아 넣으세요')
+  if (!String(talk?.motivation?.headline || '').trim()) warnings.push('참여 동기가 비어 있어요')
+  if (!String(talk?.goal?.headline || '').trim()) warnings.push('한 달 뒤 완성하고 싶은 것이 비어 있어요')
+  if (!String(talk?.pledge?.declaration || '').trim()) warnings.push('다짐과 선언이 비어 있어요')
+  if (talk?.office?.template && !['diorama', 'saas', 'rpg', 'control', 'building'].includes(talk.office.template)) problems.push('office.template 은 diorama·saas·rpg·control·building 중 하나')
   return { problems, warnings }
 }
 
 function parseArgs(argv) {
-  const o = { talk: null, theme: null, out: null, screenshot: null, allThemes: null }
+  const o = { talk: null, theme: null, out: null, screenshot: null, officeShot: null, allThemes: null }
   for (let i = 0; i < argv.length; i += 1) {
     const flag = argv[i]; const value = argv[++i]
     if (value === undefined) fail(`${flag} needs a value`)
@@ -37,6 +41,7 @@ function parseArgs(argv) {
     else if (flag === '--theme') o.theme = value
     else if (flag === '--out') o.out = value
     else if (flag === '--screenshot') o.screenshot = value
+    else if (flag === '--office-screenshot') o.officeShot = value
     else if (flag === '--all-themes') o.allThemes = value
     else fail(`unknown option: ${flag}`)
   }
@@ -58,6 +63,7 @@ function main() {
   try { talk = JSON.parse(fs.readFileSync(o.talk, 'utf8')) } catch (error) { fail(`cannot read ${o.talk}: ${error.message}`) }
   if (o.theme) talk.theme = o.theme
   if (o.screenshot) talk.dashboard = { ...(talk.dashboard || {}), screenshot: embedShot(o.screenshot) }
+  if (o.officeShot) talk.office = { ...(talk.office || {}), screenshot: embedShot(o.officeShot) }
   const { problems, warnings } = validate(talk)
   if (problems.length) fail(problems.join('\n  '))
   const keys = o.allThemes ? THEME_KEYS : [talk.theme || 'botanical']

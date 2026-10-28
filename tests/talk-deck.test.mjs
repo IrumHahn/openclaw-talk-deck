@@ -19,7 +19,7 @@ test('5 themes render a full deck with all 12 slides', () => {
     const html = renderDeck(example, key)
     assert.match(html, /^<!doctype html>/)
     assert.match(html, /pretendard/i)
-    assert.equal((html.match(/<section class="slide/g) || []).length, 16)
+    assert.equal((html.match(/<section class="slide/g) || []).length, 17)
     assert.ok(!/<script src=/i.test(html), 'no external scripts (basecamp CSP)')
     assert.match(html, /cdn\.jsdelivr\.net\/gh\/IrumHahn\/openclaw-virtual-office@main\/web\/bg\/diorama\.jpg/)
     assert.ok(!/localStorage|document\.cookie|fetch\(/.test(html), 'no storage or network in deck runtime')
@@ -126,9 +126,9 @@ test('collect drafts the office from virtual-office/org.json and detects the tem
 test('new story slides appear in order and stay out when empty', () => {
   const keys = buildSlides(example).map(s => s.match(/data-key="([^"]+)"/)[1])
   assert.deepEqual(keys.slice(0, 3), ['cover', 'agenda', 'motivation'])
-  assert.deepEqual(keys.slice(-5), ['office', 'feelings', 'goal', 'pledge', 'closing'])
+  assert.deepEqual(keys.slice(-6), ['office', 'officeteam', 'feelings', 'goal', 'pledge', 'closing'])
   const bare = buildSlides({ ...example, motivation: {}, goal: {}, pledge: {}, office: {} }).map(s => s.match(/data-key="([^"]+)"/)[1])
-  assert.ok(!bare.some(k => ['motivation', 'goal', 'pledge', 'office'].includes(k)))
+  assert.ok(!bare.some(k => ['motivation', 'goal', 'pledge', 'office', 'officeteam'].includes(k)))
 })
 
 test('publish by name: sends name, saves edit key, reuses it next time; never prints it', async () => {
@@ -162,4 +162,23 @@ test('publish by name: sends name, saves edit key, reuses it next time; never pr
   assert.equal(seen[0].editKey, undefined)
   assert.equal(seen[1].name, '김하늘')
   assert.equal(seen[1].editKey, 'tdk_' + 'f'.repeat(32))
+})
+
+test('jargon and unfilled placeholders are rejected; thin slides are reported', () => {
+  const bad = validate({ ...example, dashboard: { ...example.dashboard, headline: '메뉴는 연결, 실제 화면은 아직 미검증' } })
+  assert.ok(bad.problems.some(p => p.includes('미검증')))
+  assert.ok(validate({ ...example, members: { list: [{ name: 'moa' }] } }).problems.some(p => p.includes('영문 id')))
+  assert.ok(validate({ ...example, subtitle: '앱 API 동기화 확인' }).problems.length)
+  assert.ok(validate({ ...example, office: { ...example.office, why: '(?)' } }).problems.some(p => p.includes('안 채운')))
+  assert.deepEqual(validate(example).thin, [])
+  const thin = validate({ ...example, feelings: { headline: '좋았다' }, goal: { headline: '자동화' } }).thin.map(t => t.key)
+  assert.ok(thin.includes('feelings') && thin.includes('goal'))
+})
+
+test('every theme uses only Pretendard', () => {
+  for (const key of THEME_KEYS) {
+    const html = renderDeck(example, key)
+    assert.ok(!/fonts\.googleapis/.test(html), `${key}: no other web fonts`)
+    assert.ok(!/Gowun|Myeongjo|Black Han/.test(html), `${key}: no serif/display fonts`)
+  }
 })

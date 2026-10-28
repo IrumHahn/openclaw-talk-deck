@@ -23,15 +23,15 @@ openclaw skills list | grep talk-deck
 
 채팅: `$talk_deck 스킬로 1주차 발표자료 만들어줘.`
 
-## 테마 5종 (본문 Pretendard)
+## 테마 5종 (글꼴은 모두 Pretendard)
 
-| 키 | 이름 | 느낌 | 제목 글꼴 |
-|---|---|---|---|
-| `paper` | 페이퍼 | 미색 종이, 잡지 | 고운바탕 |
-| `midnight` | 미드나잇 | 다크 + 네온 | Pretendard Black |
-| `botanical` | 보태니컬 | 초록·테라코타 | 나눔명조 |
-| `pop` | 팝 | 원색 블록·굵은 테두리 | 검은고딕 |
-| `minimal` | 미니멀 | 흰 여백 + 파랑 | Pretendard |
+| 키 | 이름 | 느낌 |
+|---|---|---|
+| `paper` | 페이퍼 | 미색 종이, 잡지 |
+| `midnight` | 미드나잇 | 다크 + 네온 |
+| `botanical` | 보태니컬 | 초록·테라코타 |
+| `pop` | 팝 | 원색 블록·굵은 테두리 |
+| `minimal` | 미니멀 | 흰 여백 + 파랑 |
 
 예시: `examples/flower/decks/` (가상의 꽃집 사장 1주차 발표) · 온라인 https://run-academy.pages.dev/s4/talks/examples/
 

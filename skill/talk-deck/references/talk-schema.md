@@ -8,13 +8,14 @@
   "title": "꽃집 사장이\n팀장이 된 첫 주",
   "subtitle": "표지 아래 한 문장",
   "presenter": { "name": "김하늘", "about": "동네 꽃집 「오늘꽃」 운영" },
-  "motivation": { "headline": "참여 동기 한 문장 (큰 인용문)", "why": "계기 한 줄" },
+  "motivation": { "headline": "참여 동기 한 문장 (큰 인용문)", "why": "계기 2~3문장", "points": ["그때 상황 짧게", "…"] },
 
   "workMap": { "headline": "팀은 업무 지도에서 시작했습니다",
     "rows": [ { "task": "카톡 주문 정리", "frequency": "매일", "duration": "1시간", "delegation": 5, "owner": "다온" } ],
     "never": "절대 안 맡길 일과 이유" },
 
-  "structure": { "headline": "...", "meLabel": "나 · 김하늘", "me": "방향 정하고 승인",
+  "structure": { "headline": "...", "lead": "1~2문장", "meLabel": "나 · 김하늘", "me": "방향을 정하고 확인해요",
+    "flow": ["일이 흘러가는 순서 1", "2", "3"],
     "coordinator": { "name": "봄이", "role": "일 나누기 · 아침 보고", "emoji": "🌷" },
     "specialists": [ { "name": "다온", "role": "주문 정리", "emoji": "📋" } ],
     "base": "바탕: 내 VPS · 내 PC · HIA 기록",
@@ -35,10 +36,10 @@
   "review": { "headline": "...", "good": ["..."], "bad": ["..."] },
   "futureDashboard": { "headline": "...", "rows": [ { "when": "2주차", "menu": "카톡관리", "shows": "...", "owner": "..." } ], "widgetNext": "..." },
   "office": { "headline": "...", "why": "이 템플릿을 고른 이유", "template": "diorama|saas|rpg|control|building", "screenshot": null,
-    "agents": [ { "name": "봄이", "role": "총괄", "sprite": "star", "coordinator": true } ],
+    "agents": [ { "name": "봄이", "role": "총괄", "sprite": "star", "coordinator": true, "tasks": ["그 자리에서 하는 일", "…"] } ],
     "planned": [ { "title": "연락 담당", "reason": "2주차 · 카톡 주문", "sprite": "coffee" } ] },
-  "feelings": { "headline": "소감 한 문장", "stuck": "...", "surprise": "...", "nextWeek": "..." },
-  "goal": { "headline": "한 달 뒤 완성하고 싶은 것 한 문장", "items": ["눈에 보이는 결과물 1", "2", "3"] },
+  "feelings": { "headline": "소감 한 문장", "story": "2~3문장 장면", "stuck": "...", "surprise": "...", "nextWeek": "..." },
+  "goal": { "headline": "한 달 뒤 완성하고 싶은 것 한 문장", "why": "왜", "items": ["눈에 보이는 결과물 1", "2", "3"], "roadmap": [ { "week": "2주차", "text": "..." } ] },
   "pledge": { "pledges": ["다짐 1", "다짐 2", "다짐 3"], "declaration": "나는 4주 뒤, ○○ 하겠습니다.", "name": "(생략 시 발표자)", "date": "(생략 시 발표일)" },
   "closing": { "line": "감사합니다", "ask": "청중에게 부탁 한 줄" },
   "notes": { "cover": "말하기 예", "workmap": "...", "dashboard": "...", "feelings": "..." }
@@ -49,3 +50,6 @@
 - `office` 는 collect 가 가상 오피스 `org.json`·`office.html` 로 채운다. `sprite` 12종: star chart gamepad pen laptop palette lens mirror sprout book camera coffee. 캡처는 `build.mjs --office-screenshot`.
 - `notes` 키: cover · agenda · motivation · workmap · structure · members · selfintro · futureteam · dashboard · review · futuredash · office · feelings · goal · pledge · closing.
 - 장 수 상한: 업무 지도 6행, 멤버 4명, 전문가 4명, 타임라인 4칸, 리뷰 각 4개, 대시보드 계획 5행.
+
+- 모든 장에 `headline`(할 말 한 문장)과 `lead`(1~2문장 설명)를 쓸 수 있다. 멤버는 `quote`(그 동료의 한마디). 가상 오피스는 장면 장(`office`)과 자리 소개 장(`officeteam`) 두 장이 된다(`teamSlide:false` 로 끌 수 있음).
+- 글꼴은 모든 테마에서 Pretendard 하나. 빌드는 금지어(작업 상태어·개발 용어·영문 id)가 있으면 멈추고, 글이 적은 장을 `thin` 으로 알려 준다.

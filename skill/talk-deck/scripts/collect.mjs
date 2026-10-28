@@ -128,7 +128,7 @@ export function draftOffice(org, html) {
   if (!org || !Array.isArray(org.agents)) return null
   return {
     headline: '', why: '', screenshot: null, template: officeTemplateOf(html),
-    agents: org.agents.map(a => ({ name: a.name, role: a.role || '', sprite: a.sprite || 'coffee', coordinator: a.coordinator === true })),
+    agents: org.agents.map(a => ({ name: a.name, role: a.role || '', sprite: a.sprite || 'coffee', coordinator: a.coordinator === true, tasks: (Array.isArray(a.tasks) ? a.tasks : []).slice(0, 3) })),
     planned: (org.planned || []).map(p => ({ title: p.title, reason: p.reason || '', sprite: p.sprite || 'coffee' })),
   }
 }
@@ -156,9 +156,9 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
     date: new Date(today.getTime() + 86400000).toISOString().slice(0, 10),
     title: '', subtitle: '',
     presenter: { name: userName, about: team?.team?.organization || '' },
-    motivation: { headline: '', why: '' },
+    motivation: { headline: '', why: '', points: [] },
     workMap: { headline: '', rows: wm.rows.slice(0, 5).map(r => ({ ...r, owner: '' })), never: wm.never },
-    structure: { headline: '', me: '방향 정하고 승인', coordinator: lead ? { name: lead.name, role: lead.mission || lead.role, emoji: lead.emoji || '' } : {}, specialists: specs.map(a => ({ name: a.name, role: a.mission || a.role, emoji: a.emoji || '' })), base: '바탕: 내 VPS(오픈클로) · 내 PC(노드 연결) · HIA 기록', permissions: { auto: [], approve: [], never: [] } },
+    structure: { headline: '', lead: '', flow: [], me: '방향을 정하고 확인해요', coordinator: lead ? { name: lead.name, role: lead.mission || lead.role, emoji: lead.emoji || '' } : {}, specialists: specs.map(a => ({ name: a.name, role: a.mission || a.role, emoji: a.emoji || '' })), permissions: { auto: [], approve: [], never: [] } },
     members: { headline: '', list: agents.map(a => ({ name: a.name, emoji: a.emoji || '', kind: a === lead ? '총괄' : '전문가', role: a.role || '', relation: '', tone: '', dislike: '', firstTask: a.firstTasks?.[0]?.task || '' })) },
     selfIntro: { quote: '', checks: [], fix: '' },
     futureTeam: { headline: '', steps: [{ when: '지금 · 1주차', title: `${agents.length}명`, desc: agents.map(a => a.name).join(' · ') }], principle: '' },
@@ -166,8 +166,8 @@ export function draftTalk({ files, week = 1, today = new Date() }) {
     review: { headline: '', good: [], bad: [] },
     futureDashboard: { headline: '', rows: [], widgetNext: '' },
     office: officeDraft || { headline: '', template: '', agents: [], planned: [] },
-    feelings: { headline: '', stuck: '', surprise: '', nextWeek: '' },
-    goal: { headline: '', items: [] },
+    feelings: { headline: '', story: '', stuck: '', surprise: '', nextWeek: '' },
+    goal: { headline: '', why: '', items: [], roadmap: [] },
     pledge: { pledges: [], declaration: '' },
     closing: { line: '감사합니다', ask: '' },
     notes: {},

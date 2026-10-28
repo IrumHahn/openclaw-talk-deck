@@ -3,183 +3,245 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="talk-deck/0.1 theme=minimal">
-<title>김하늘 · 꽃집 사장이
-팀장이 된 첫 주</title>
+<meta name="generator" content="talk-deck/0.3 theme=minimal">
+<title>김하늘 · 꽃집 사장이 팀장이 된 첫 주</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>:root{--bg:#FBFBFA;--bg2:#F2F3F5;--ink:#111316;--muted:#5B616B;--accent:#2563EB;--accent2:#111316;--card:#FFFFFF;--line:#E3E5E9;--dark:#111316;--dark-ink:#FBFBFA;--radius:10px;--border:1px solid #E3E5E9;--shadow:none;--hfont:'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;--hweight:700;--bfont:'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif}
+<style>:root{--bg:#FBFBFA;--bg2:#F2F3F5;--ink:#111316;--muted:#5B616B;--accent:#2563EB;--accent2:#111316;--card:#FFFFFF;--line:#E3E5E9;--dark:#111316;--dark-ink:#FBFBFA;--soft:#DCE7FD;--radius:10px;--border:1px solid #E3E5E9;--shadow:none;--hweight:700;--font:'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#0b0b0c;overflow:hidden;font-family:var(--bfont);-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:#0b0b0c;overflow:hidden;font-family:var(--font);-webkit-font-smoothing:antialiased;word-break:keep-all}
 #stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center;transform:translate(-50%,-50%)}
-.slide{position:absolute;inset:0;display:none;flex-direction:column;gap:44px;padding:110px 128px 120px;background:var(--bg);color:var(--ink);overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;gap:40px;padding:96px 128px 104px;background:var(--bg);color:var(--ink);overflow:hidden}
 .slide.on{display:flex}
 .slide aside{display:none}
 .dark{background:var(--dark);color:var(--dark-ink)}
-.dark .muted{color:color-mix(in srgb,var(--dark-ink) 70%,transparent)}
+.dark .muted,.dark .lead{color:color-mix(in srgb,var(--dark-ink) 72%,transparent)}
 .muted{color:var(--muted)}
 .hd{display:flex;flex-direction:column;gap:14px}
-.eyebrow{font-size:28px;font-weight:700;color:var(--accent);letter-spacing:.01em}
-.title{font-family:var(--hfont);font-weight:var(--hweight);font-size:76px;line-height:1.18;letter-spacing:-.01em}
-h3{font-size:40px;font-weight:700;line-height:1.3}
-p,li,td,th{font-size:32px;line-height:1.5}
+.eyebrow{font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-.005em}
+.title{font-weight:var(--hweight);font-size:72px;line-height:1.2;letter-spacing:-.025em}
+.lead{font-size:32px;line-height:1.55;color:var(--muted);max-width:1560px;margin-top:4px}
+h3{font-size:38px;font-weight:800;line-height:1.3;letter-spacing:-.015em}
+p,li,td,th{font-size:30px;line-height:1.55}
 .slide>.hd+*{margin-top:auto;margin-bottom:auto}
 .card{background:var(--card);border:var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:36px}
 .chip{display:inline-block;font-size:24px;font-weight:700;background:var(--accent);color:var(--bg);padding:6px 18px;border-radius:999px;white-space:nowrap}
+.pill{display:inline-block;font-size:28px;font-weight:600;background:var(--soft);color:var(--ink);padding:10px 22px;border-radius:999px}
 .row{display:flex;gap:44px;align-items:flex-start}
-.stack{display:flex;flex-direction:column;gap:32px}
+.stack,.col-gap{display:flex;flex-direction:column;gap:30px}
 .s-cover{justify-content:space-between}
 .cover-top{display:flex;gap:18px;align-items:center}.cover-top .muted{font-size:26px}
 .cover-main{display:flex;flex-direction:column;gap:30px}
-.cover-title{font-family:var(--hfont);font-weight:var(--hweight);font-size:116px;line-height:1.15;letter-spacing:-.02em}
-.cover-sub{font-size:40px;line-height:1.45;color:var(--accent);max-width:1500px}
+.cover-title{font-weight:var(--hweight);font-size:120px;line-height:1.12;letter-spacing:-.035em}
+.cover-sub{font-size:40px;line-height:1.45;color:var(--accent);max-width:1500px;font-weight:500}
 .cover-foot{display:flex;justify-content:space-between;align-items:flex-end}.cover-foot p{font-size:30px}
-.agenda{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.agenda-item{display:flex;flex-direction:column;gap:14px;background:var(--bg2)}
-.agenda-item .num{font-size:40px;font-weight:800;color:var(--accent)}.agenda-item p.muted{font-size:28px}.agenda-item{padding:44px 36px;gap:18px}
+.agenda{display:grid;gap:24px}
+.agenda-item{display:flex;flex-direction:column;gap:14px;background:var(--bg2);padding:40px 36px}
+.agenda-item .num{font-size:40px;font-weight:900;color:var(--accent)}.agenda-item p.muted{font-size:28px}
+.quote-wrap{display:flex;flex-direction:column;gap:28px;max-width:1560px}
+.quote-wrap.solo{margin:auto 0}
+.qmark{font-size:220px;font-weight:900;line-height:.6;color:var(--accent);height:100px}
+.quote{font-weight:var(--hweight);font-size:80px;line-height:1.28;letter-spacing:-.03em}
+.quote-wrap.solo .quote{font-size:96px}
+.qwhy{font-size:36px;color:var(--muted);line-height:1.6}
+.chips{display:flex;flex-wrap:wrap;gap:14px}
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-size:28px;color:var(--muted);text-align:left;font-weight:700;padding:14px 18px;border-bottom:2px solid var(--ink)}
-.tbl td{padding:24px 18px;border-bottom:1px solid var(--line)}
+.tbl th{font-size:26px;color:var(--muted);text-align:left;font-weight:700;padding:14px 18px;border-bottom:2px solid var(--ink)}
+.tbl td{padding:22px 18px;border-bottom:1px solid var(--line)}
 .tbl tbody tr:nth-child(even){background:var(--bg2)}
+.meter{display:inline-block;width:110px;height:12px;border-radius:6px;background:var(--line);vertical-align:middle;margin-right:8px;overflow:hidden}.meter i{display:block;height:100%;width:calc(var(--v) * 20%);background:var(--accent)}
 .band{display:flex;gap:24px;align-items:center;background:var(--dark);color:var(--dark-ink);padding:28px 40px;border-radius:var(--radius)}
 .band p{font-size:34px}
-.org{position:relative;height:600px;flex:none}
+.insight{font-size:34px;font-weight:600;color:var(--accent2);border-left:6px solid var(--accent2);padding-left:24px}
+.org{position:relative;flex:none}
 .org-lines{position:absolute;left:0;top:0;color:var(--muted)}.org-lines line{stroke:currentColor;stroke-width:3}
-.org-box{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;border-radius:var(--radius);padding:10px}
-.org-box b{font-size:36px}.org-box span{font-size:26px;line-height:1.35}
+.org-box{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;border-radius:var(--radius);padding:10px 14px}
+.org-box b{font-size:34px;font-weight:800;line-height:1.2}.org-box span{font-size:23px;line-height:1.3}.org.compact .org-box b{font-size:30px}.org.compact .org-box span{font-size:21px}
 .org-me{background:var(--bg2);border:2px solid var(--ink)}
-.org-lead{background:var(--dark);color:var(--dark-ink)}.org-lead span{color:var(--accent)}
+.org-lead{background:var(--dark);color:var(--dark-ink)}.org-lead span{color:color-mix(in srgb,var(--dark-ink) 80%,transparent)}
 .org-spec{background:var(--card);border:2px solid var(--accent2);box-shadow:var(--shadow)}.org-spec b{color:var(--accent2)}.org-spec span{color:var(--muted)}
-.org-base{position:absolute;left:0;right:0;top:548px;text-align:center;font-size:24px;color:var(--muted);background:var(--bg2);border-radius:12px;padding:8px 16px}
-.perms{flex:1;display:flex;flex-direction:column;gap:20px;background:var(--bg2)}
-.perm-label{font-size:30px;font-weight:700}.perm p:last-child{font-size:28px;color:var(--muted)}
+.flow{flex:1;display:flex;flex-direction:column;gap:16px}
+.flow-title{font-size:30px;font-weight:800;color:var(--accent)}
+.flow ol{list-style:none;counter-reset:fl;display:flex;flex-direction:column;gap:14px}
+.flow li{counter-increment:fl;display:flex;gap:16px;align-items:baseline;font-size:27px;line-height:1.42}
+.flow li::before{content:counter(fl);flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:800;background:var(--soft);color:var(--accent)}
+.perms{flex:1;display:flex;flex-direction:column;gap:22px;background:var(--bg2)}
+.perms-band{background:var(--bg2);border-radius:var(--radius);padding:20px 30px;display:flex;flex-direction:column;gap:8px}
+.perms-title{font-size:26px;font-weight:800;color:var(--muted)}
+.perms-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.perm-label{font-size:26px;font-weight:800}
+.perm ul{list-style:none;display:flex;flex-direction:column;gap:2px;margin-top:4px}.perm li{font-size:23px;line-height:1.4;color:var(--muted)}.perm li::before{content:'· '}
 .p-auto .perm-label{color:var(--accent2)}.p-approve .perm-label{color:var(--accent)}
 .members{display:grid;gap:24px}
-.member{display:flex;flex-direction:column;gap:14px;background:var(--bg2)}
+.member{display:flex;flex-direction:column;gap:14px;background:var(--bg2);padding:30px 32px}
 .member.lead{background:var(--dark);color:var(--dark-ink)}
+.mtop{display:flex;gap:20px;align-items:center}
+.mface{height:104px;width:auto;flex:none;filter:drop-shadow(0 6px 6px rgba(0,0,0,.18))}
 .member .kind{font-size:24px;font-weight:700;color:var(--accent)}
-.mname{font-family:var(--hfont);font-weight:var(--hweight);font-size:58px}
-.mfields p{font-size:29px;line-height:1.6}
-.member.lead .mfields p{color:color-mix(in srgb,var(--dark-ink) 85%,transparent)}
+.mname{font-weight:var(--hweight);font-size:52px;letter-spacing:-.02em}
+.mrole{font-size:26px;opacity:.8}
+.mfields{display:flex;flex-direction:column;gap:8px}
+.mf span{display:block;font-size:21px;font-weight:700;opacity:.65}.mf p{font-size:27px;line-height:1.4}
+.mquote{font-size:26px;line-height:1.45;padding:14px 18px;border-radius:14px;background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.member.wide{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start}
+.member.wide .mfields{grid-row:span 2}
 .chat{flex:1;display:flex;flex-direction:column;gap:22px;background:var(--bg2)}
-.bubble{font-size:33px;padding:18px 26px;border-radius:20px;max-width:880px}
+.bubble{font-size:33px;padding:18px 26px;border-radius:20px;max-width:900px}
 .bubble.me{align-self:flex-end;background:var(--dark);color:var(--dark-ink)}
 .bubble.bot{align-self:flex-start;background:var(--card);border:var(--border)}
 .checks{width:560px;display:flex;flex-direction:column;gap:18px}
-.check{display:flex;gap:14px;align-items:center;font-size:32px}
+.check{display:flex;gap:14px;align-items:center;font-size:31px}
 .check span{font-size:22px;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--accent2);color:var(--bg);white-space:nowrap}
 .check.no span{background:var(--accent)}
 .fix{font-size:28px;background:var(--bg2);padding:16px 20px;border-radius:12px;color:var(--muted)}
 .timeline{display:grid}
-.step{display:flex;flex-direction:column;gap:14px;padding:32px;border-top:8px solid var(--accent2)}
+.step{display:flex;flex-direction:column;gap:14px;padding:40px 34px;border-top:8px solid var(--accent2)}
 .step.now{border-top-color:var(--ink);background:var(--bg2)}
 .step:last-child{border-top-color:var(--accent)}
-.when{font-size:28px;font-weight:700;color:var(--accent2)}.step p.muted{font-size:29px}.step{padding:40px 34px}
-.principle{font-size:36px;margin-top:-20px;color:var(--accent2)}
+.when{font-size:28px;font-weight:700;color:var(--accent2)}.step p.muted{font-size:29px}
+.principle{font-size:36px;color:var(--accent2);margin-top:-12px}
 .dash-row{align-items:stretch}
 .shot{width:1160px;height:650px;object-fit:contain;background:var(--bg2);border:var(--border);border-radius:12px;flex:none}
-.shot-wrap{position:relative;flex:none}
-.shot-note{position:absolute;right:14px;bottom:10px;font-size:20px;color:var(--muted);background:var(--card);padding:2px 10px;border-radius:8px}
-.callouts{flex:1;display:flex;flex-direction:column;gap:30px}
-.callout-t{font-size:32px;font-weight:700;color:var(--accent)}.callouts p.muted{font-size:28px}
-.mini{width:1160px;height:650px;display:flex;background:#F6F5F1;color:#1d211e;border:2px solid var(--line);border-radius:14px;overflow:hidden;font-family:var(--bfont)}
+.callouts{flex:1;display:flex;flex-direction:column;gap:30px;justify-content:center}
+.callout-t{font-size:31px;font-weight:800;color:var(--accent);display:flex;gap:12px;align-items:center}.callouts p.muted{font-size:28px}
+.cnum{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--bg);font-size:22px;flex:none}
+.mini{width:1160px;height:650px;display:flex;background:#F6F5F1;color:#1d211e;border:2px solid var(--line);border-radius:14px;overflow:hidden;flex:none}
 .mini p{line-height:1.35}
-.mini-side{width:250px;background:#EAEAE3;padding:22px 16px;display:flex;flex-direction:column;gap:8px}
-.mini-logo{font-size:20px;font-weight:800;margin-bottom:8px}
-.mini-group{font-size:15px;color:#7a7f78;margin-top:10px}
-.mini-item{font-size:17px;padding:5px 8px;border-radius:6px;display:flex;justify-content:space-between;gap:6px}
-.mini-item span{font-size:13px;color:#7a7f78;white-space:nowrap}
-.mini-main{flex:1;padding:26px 30px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.mini-name{font-family:var(--hfont);font-size:34px;font-weight:700}
-.mini-tag{font-size:17px;color:#5c635d;margin-top:-8px}
-.mini-tiles{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #dcdcd2;border-radius:8px;overflow:hidden}
-.mini-tile{padding:12px 14px;border-right:1px solid #dcdcd2;border-bottom:1px solid #dcdcd2;background:#fbfbf8;display:flex;flex-direction:column;gap:4px}
-.mini-tile b{font-size:17px}.mini-tile span{font-size:14px;color:#6b706a}
-.mini-widget{border:1px solid #dcdcd2;border-radius:8px;background:#fbfbf8;padding:16px 18px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}
-.mini-wtitle{font-size:19px;font-weight:700}
+.mini-side{width:270px;background:#EAEAE3;padding:24px 18px;display:flex;flex-direction:column;gap:8px}
+.mini-logo{font-size:21px;font-weight:800;margin-bottom:8px}
+.mini-group{font-size:16px;color:#6b706a;margin-top:12px;font-weight:600}
+.mini-item{font-size:19px;padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between;gap:6px}
+.mini-item span{font-size:15px;color:#6b706a;white-space:nowrap}
+.mini-main{flex:1;padding:30px 34px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.mini-name{font-size:38px;font-weight:800;letter-spacing:-.02em}
+.mini-tag{font-size:19px;color:#5c635d;margin-top:-8px}
+.mini-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mini-tile{padding:16px 18px;border:1px solid #dcdcd2;border-radius:10px;background:#fbfbf8;display:flex;flex-direction:column;gap:6px}
+.mini-tile b{font-size:20px}.mini-tile span{font-size:16px;color:#6b706a}
+.mini.no-widget .mini-tiles{flex:1;grid-auto-rows:1fr}.mini.no-widget .mini-tile{justify-content:flex-end;gap:8px;padding:20px 22px;background:linear-gradient(160deg,#fff 0%,#f3f2ec 100%);position:relative}.mini-ic{display:none}.mini.no-widget .mini-ic{display:grid;place-items:center;position:absolute;left:22px;top:20px;width:48px;height:48px;border-radius:14px;font-style:normal;font-size:24px;font-weight:800;background:color-mix(in srgb,var(--accent) 16%,#fff);color:var(--accent)}.mini.no-widget .mini-tile b{font-size:26px}.mini.no-widget .mini-tile span{font-size:18px}
+.mini-widget{border:1px solid #dcdcd2;border-radius:10px;background:#fbfbf8;padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}
+.mini-wtitle{font-size:20px;font-weight:700}
 .mini-wbody{display:grid;grid-template-columns:1fr 1.1fr;gap:18px}
-.mini-blabel{font-size:14px;color:#6b706a;font-weight:600}
-.mini-big{font-size:52px;font-weight:800;color:var(--accent2);line-height:1.05}
-.mini-sub{font-size:15px}
+.mini-blabel{font-size:15px;color:#6b706a;font-weight:600}
+.mini-big{font-size:54px;font-weight:800;color:var(--accent2);line-height:1.05}
+.mini-sub{font-size:16px}
 .mini-bars{display:flex;flex-direction:column;gap:6px;margin-top:8px}
-.mini-bar{display:grid;grid-template-columns:78px 1fr 22px;align-items:center;gap:8px}
-.mini-bar span,.mini-bar b{font-size:14px}
+.mini-bar{display:grid;grid-template-columns:80px 1fr 22px;align-items:center;gap:8px}
+.mini-bar span,.mini-bar b{font-size:15px}
 .mini-bar i{display:block;height:8px;background:#e1e1d8;border-radius:4px;overflow:hidden}.mini-bar em{display:block;height:100%;background:var(--accent2)}
 .mini-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.mini-list li{display:flex;justify-content:space-between;gap:8px;font-size:15px;padding:7px 10px;border:1px solid #dcdcd2;border-radius:6px;background:#fff;line-height:1.3}
-.mini-list li span{color:#6b706a;white-space:nowrap;font-size:14px}.mini-list li.first{border-color:var(--accent)}.mini-list li.first span{color:var(--accent);font-weight:700}
+.mini-list li{display:flex;justify-content:space-between;gap:8px;font-size:16px;padding:8px 10px;border:1px solid #dcdcd2;border-radius:6px;background:#fff;line-height:1.3}
+.mini-list li span{color:#6b706a;white-space:nowrap;font-size:15px}.mini-list li.first{border-color:var(--accent)}.mini-list li.first span{color:var(--accent);font-weight:700}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.rv{display:flex;flex-direction:column;gap:20px}
+.rv{display:flex;flex-direction:column;gap:20px;padding:48px}
 .rv.good h3{color:var(--accent2)}.rv.bad h3{color:var(--accent)}
-.rv ul{padding-left:40px;display:flex;flex-direction:column;gap:16px}.rv li{font-size:34px}.rv{padding:48px}
+.rv ul{padding-left:40px;display:flex;flex-direction:column;gap:16px}.rv li{font-size:33px}
+.s-office{padding-top:80px;gap:30px}
+.s-tight{padding-top:76px;padding-bottom:70px;gap:24px}.s-tight .title{font-size:62px}.s-tight .lead{font-size:28px}.s-tight .col-gap{gap:22px}.s-tight .hd{gap:8px}
+.vo-stage{position:relative;flex:none;background-size:cover;background-position:center;border-radius:16px;border:var(--border);overflow:hidden}
+.vo-actor{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.vo-actor img{display:block;width:auto;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2))}
+.vo-tag{font-size:18px;font-weight:700;line-height:1.2;white-space:nowrap;background:rgba(255,255,255,.94);color:#1d211e;padding:4px 10px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.vo-actor.ghost img{opacity:.42;filter:grayscale(.6)}
+.vo-actor.ghost .vo-tag{background:rgba(255,255,255,.8);border:1.5px dashed var(--accent);color:var(--accent)}
+.vo-side{flex:1;display:flex;flex-direction:column;gap:28px;justify-content:center}
+.vo-badge{background:var(--bg2);border-radius:var(--radius);padding:26px 28px;display:flex;flex-direction:column;gap:8px}
+.vo-badge small{font-size:22px;font-weight:700;color:var(--muted)}.vo-badge b{font-size:38px;font-weight:800;color:var(--accent)}.vo-badge p{font-size:25px;line-height:1.5;color:var(--muted)}
+.vo-count{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vo-count div{border:var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;background:var(--card)}
+.vo-count b{font-size:56px;font-weight:900;line-height:1.1;color:var(--accent2)}.vo-count span{font-size:22px;color:var(--muted)}
+.vo-legend{font-size:23px;color:var(--muted);display:flex;gap:10px;align-items:center}.vo-legend i{width:30px;height:20px;border:2px dashed var(--accent);border-radius:6px;flex:none}
+.seats{display:grid;gap:24px;grid-auto-rows:1fr}
+.seat{display:flex;gap:30px;align-items:center;background:var(--bg2);padding:36px 36px}
+.seat-face{height:220px;width:auto;flex:none;filter:drop-shadow(0 8px 8px rgba(0,0,0,.18))}.seat-face.px{image-rendering:pixelated}
+.seat-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.seat .kind{font-size:24px;font-weight:700;color:var(--accent)}
+.seat h3{font-size:46px}
+.seat ul{list-style:none;display:flex;flex-direction:column;gap:4px}.seat li{font-size:28px;line-height:1.45;color:var(--muted)}.seat li::before{content:'· '}
+.seat .muted{font-size:27px;line-height:1.45}
+.seat.ghost{background:transparent;border:3px dashed var(--accent);box-shadow:none}.seat.ghost .seat-face{opacity:.5;filter:grayscale(.5)}
 .s-feel{justify-content:space-between}
-.big-quote{font-size:66px;line-height:1.3}
-.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.fbox p{font-size:32px}.fbox{background:color-mix(in srgb,var(--dark-ink) 8%,transparent);border-color:transparent;box-shadow:none;display:flex;flex-direction:column;gap:12px}
-.flabel{font-size:30px;font-weight:700;color:var(--accent)}
-.s-close{justify-content:center}
-.close{display:flex;flex-direction:column;gap:30px}
-.quote-wrap{display:flex;flex-direction:column;gap:30px;max-width:1500px}
-.qmark{font-family:var(--hfont);font-size:200px;line-height:.6;color:var(--accent);height:90px}
-.qwhy{font-size:36px;color:var(--muted);line-height:1.55}
+.big-quote{font-size:70px;line-height:1.3}
+.fgrid{display:grid;gap:24px}
+.fgrid.n1{grid-template-columns:1fr}.fgrid.n2{grid-template-columns:1fr 1fr}.fgrid.n3{grid-template-columns:repeat(3,1fr)}
+.fbox{background:color-mix(in srgb,var(--dark-ink) 8%,transparent);border-color:transparent;box-shadow:none;display:flex;flex-direction:column;gap:12px}
+.fbox p{font-size:32px}.fgrid.n1 .fbox{flex-direction:row;align-items:center;gap:40px;padding:44px 48px}.fgrid.n1 .fbox p:last-child{font-size:44px;font-weight:700}
+.flabel{font-size:30px;font-weight:800;color:var(--accent);white-space:nowrap}
 .goals{display:grid;gap:24px}
 .goal{display:flex;flex-direction:column;gap:16px;background:var(--bg2)}
-.gnum{font-size:44px;font-weight:800;color:var(--accent)}.goal p:last-child{font-size:34px;line-height:1.45}
+.gnum{font-size:44px;font-weight:900;color:var(--accent)}.goal p:last-child{font-size:33px;line-height:1.45}
+.road{display:flex;align-items:stretch;gap:14px}
+.road-step{flex:1;border:var(--border);border-radius:var(--radius);padding:22px 24px;background:var(--card)}.road-step b{font-size:26px;color:var(--accent2)}.road-step p{font-size:27px;line-height:1.45}
+.road-arrow{align-self:center;font-style:normal;font-size:34px;color:var(--muted)}
+.s-solo{justify-content:center}
+.solo-wrap{display:flex;flex-direction:column;gap:30px;max-width:1600px}
+.solo-title{font-weight:var(--hweight);font-size:120px;line-height:1.15;letter-spacing:-.035em}
 .s-pledge{justify-content:space-between}
 .pledge{display:flex;flex-direction:column;gap:44px;margin:auto 0}
 .plist{list-style:none;counter-reset:pl;display:flex;flex-direction:column;gap:18px}
 .plist li{counter-increment:pl;font-size:36px;line-height:1.4;display:flex;gap:22px;align-items:baseline}
 .plist li::before{content:counter(pl);flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;font-weight:800;background:var(--accent);color:var(--dark)}
-.declare{font-family:var(--hfont);font-weight:var(--hweight);font-size:78px;line-height:1.25;letter-spacing:-.01em}
+.declare{font-weight:var(--hweight);font-size:80px;line-height:1.25;letter-spacing:-.03em}
+.pledge.solo .declare{font-size:104px}
 .sign{display:flex;align-items:center;gap:24px;font-size:30px}.sign i{flex:0 0 360px;height:2px;background:currentColor;opacity:.5}
-.vo-stage{position:relative;flex:none;background-size:cover;background-position:center;border-radius:14px;border:var(--border);overflow:hidden}
-.vo-actor{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
-.vo-actor img{display:block;width:auto;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2))}
-.vo-tag{font-size:17px;font-weight:700;line-height:1.2;white-space:nowrap;background:rgba(255,255,255,.92);color:#1d211e;padding:3px 9px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-.vo-actor.ghost img{opacity:.42;filter:grayscale(.6)}
-.vo-actor.ghost .vo-tag{background:rgba(255,255,255,.75);border:1.5px dashed var(--accent);color:var(--accent)}
-.vo-side p.muted{font-size:27px}
+.s-close{justify-content:center}
+.close{display:flex;flex-direction:column;gap:30px}
 #ui{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.08);z-index:5}
 #bar{height:100%;width:0;background:#2563EB;transition:width .25s}
-#num{position:fixed;right:16px;bottom:12px;font:600 13px/1 var(--bfont);color:rgba(255,255,255,.55);background:rgba(0,0,0,.35);padding:5px 9px;border-radius:999px;z-index:5}
-#notes{position:fixed;left:16px;right:16px;bottom:16px;max-height:34vh;overflow:auto;background:rgba(15,15,18,.92);color:#f2f2f2;font:16px/1.6 var(--bfont);padding:16px 20px;border-radius:12px;display:none;z-index:6;white-space:pre-wrap}
+#num{position:fixed;right:16px;bottom:12px;font:600 13px/1 var(--font);color:rgba(255,255,255,.55);background:rgba(0,0,0,.35);padding:5px 9px;border-radius:999px;z-index:5}
+#notes{position:fixed;left:16px;right:16px;bottom:16px;max-height:34vh;overflow:auto;background:rgba(15,15,18,.92);color:#f2f2f2;font:16px/1.6 var(--font);padding:16px 20px;border-radius:12px;display:none;z-index:6;white-space:pre-wrap}
 #notes.on{display:block}
-#help{position:fixed;left:16px;bottom:12px;font:12px/1 var(--bfont);color:rgba(255,255,255,.45);z-index:5}
-.s-cover.dark,.s-close.dark{background:var(--bg);color:var(--ink)}.s-cover.dark .muted,.s-close.dark .muted{color:var(--muted)}.s-cover.dark .cover-sub{color:var(--accent)}.s-cover{border-left:24px solid var(--accent)}.eyebrow{color:var(--muted);font-weight:600;padding-left:16px;border-left:4px solid var(--accent)}.title{font-weight:700}.cover-title{font-weight:800}.agenda-item,.member,.perms,.chat{background:var(--card)}.member.lead{background:var(--card);color:var(--ink);border:2px solid var(--ink)}.member.lead .mfields p{color:var(--muted)}.band{background:var(--bg2);color:var(--ink)}.band .chip{background:var(--ink)}.org-lead{background:var(--ink)}.step{border-top-width:3px}.step.now{background:transparent}.cover-sub{color:var(--muted)}.dark .cover-sub{color:#9fb6f7}</style>
+#help{position:fixed;left:16px;bottom:12px;font:12px/1 var(--font);color:rgba(255,255,255,.45);z-index:5}
+.s-cover.dark,.s-close.dark{background:var(--bg);color:var(--ink)}.s-cover.dark .muted,.s-close.dark .muted{color:var(--muted)}.s-cover.dark .cover-sub{color:var(--accent)}.s-cover{border-left:24px solid var(--accent)}.eyebrow{color:var(--muted);font-weight:600;padding-left:16px;border-left:4px solid var(--accent)}.agenda-item,.member,.perms,.chat{background:var(--card)}.member.lead{background:var(--card);color:var(--ink);border:2px solid var(--ink)}.band{background:var(--bg2);color:var(--ink)}.band .chip{background:var(--ink)}.org-lead{background:var(--ink)}.step{border-top-width:3px}.step.now{background:transparent}.cover-sub{color:var(--muted)}.dark .cover-sub{color:#9fb6f7}</style>
 </head>
 <body>
 <div id="stage">
 <section class="slide s-cover dark" data-key="cover"><div class="cover-top"><span class="chip">1주차 발표</span><span class="muted">AI 에이전트 실전 1기</span></div>
 <div class="cover-main"><h1 class="cover-title">꽃집 사장이<br>팀장이 된 첫 주</h1><p class="cover-sub">혼자 하던 주문·인스타·거래처 일을 세 명의 에이전트와 나눠 보기로 했습니다</p></div>
 <div class="cover-foot"><p><b>김하늘</b> · 동네 꽃집 「오늘꽃」 운영 (가상 인물)</p><p class="muted">2026-10-29</p></div><aside>안녕하세요, 동네 꽃집을 하는 김하늘입니다. 이번 주에 저는 사장에서 팀장이 됐습니다.</aside></section>
-<section class="slide s-agenda" data-key="agenda"><header class="hd"><p class="eyebrow">발표 순서</p><h2 class="title">오늘 이야기할 여섯 가지</h2></header><div class="agenda" style="grid-template-columns:repeat(3,1fr)"><div class="card agenda-item"><p class="num">1</p><h3>참여 동기</h3><p class="muted">왜 이 과정에 왔나</p></div><div class="card agenda-item"><p class="num">2</p><h3>내가 생각하는 에이전트 팀과 구조도</h3><p class="muted">업무 지도 → 왜 이런 팀인가</p></div><div class="card agenda-item"><p class="num">3</p><h3>팀 멤버 소개 + 앞으로 만들 팀</h3><p class="muted">지금의 팀 → 4주 뒤 모습</p></div><div class="card agenda-item"><p class="num">4</p><h3>대시보드 리뷰 + 앞으로 만들 대시보드</h3><p class="muted">나만 가진 메뉴와 위젯 · 가상 오피스</p></div><div class="card agenda-item"><p class="num">5</p><h3>1주차 소감</h3><p class="muted">막힌 곳 · 놀란 순간 · 다음 주</p></div><div class="card agenda-item"><p class="num">6</p><h3>한 달 뒤의 나 + 선언</h3><p class="muted">완성하고 싶은 것과 다짐</p></div></div></section>
-<section class="slide s-quote" data-key="motivation"><header class="hd"><p class="eyebrow">참여 동기</p></header><div class="quote-wrap"><p class="qmark">“</p><h2 class="title big-quote">가게 문을 닫고 나서야<br>내 시간이 시작되는 게 싫었어요</h2><p class="qwhy">밤마다 카톡 주문을 정리하다 보면 하루가 끝나 있었습니다. 일을 나눠 줄 동료가 필요했어요.</p></div><aside>밤마다 주문 정리하다 하루가 끝나는 게 제일 힘들었어요.</aside></section>
-<section class="slide " data-key="workmap"><header class="hd"><p class="eyebrow">① 내가 생각하는 에이전트 팀</p><h2 class="title">팀은 업무 지도에서 시작했습니다</h2></header><div class="stack"><table class="tbl"><thead><tr><th>업무</th><th>빈도</th><th>시간</th><th>맡기고 싶은 정도</th><th>맡길 사람</th></tr></thead><tbody><tr><td>카톡·전화 주문 받아 정리하기</td><td>매일</td><td>1시간</td><td>5 / 5</td><td>다온</td></tr><tr><td>인스타 꽃 사진 글 쓰기</td><td>주 3회</td><td>40분</td><td>4 / 5</td><td>글담</td></tr><tr><td>거래처 입고·재고 확인</td><td>주 2회</td><td>30분</td><td>3 / 5</td><td>봄이</td></tr></tbody></table><div class="band"><span class="chip">절대 안 맡김</span><p>꽃 고르기와 손님 상담. 이건 제가 가게를 하는 이유라서요.</p></div></div><aside>제일 시간을 많이 잡아먹는 게 카톡 주문 정리였어요. 그래서 첫 번째 직원은 주문 담당입니다.</aside></section>
-<section class="slide " data-key="structure"><header class="hd"><p class="eyebrow">① 구조도</p><h2 class="title">나는 승인만, 총괄이 나눠 줍니다</h2></header><div class="row org-row"><div class="org" style="width:1080px">
-<svg class="org-lines" width="1080" height="520" viewBox="0 0 1080 520" aria-hidden="true"><line x1="540" y1="100" x2="540" y2="170"/><line x1="540" y1="300" x2="540" y2="340"/><line x1="324" y1="340" x2="756" y2="340"/><line x1="324" y1="340" x2="324" y2="380"/><line x1="756" y1="340" x2="756" y2="380"/></svg>
-<div class="org-box org-me" style="left:370px;top:0px;width:340px;height:100px"><b>나 · 김하늘</b><span>방향 정하고 승인</span></div>
-<div class="org-box org-lead" style="left:320px;top:170px;width:440px;height:130px"><b>🌷 봄이</b><span>일 나누기 · 아침 보고 · 재고 확인</span></div>
-<div class="org-box org-spec" style="left:124px;top:380px;width:400px;height:140px"><b>📋 다온</b><span>주문 받아 표로 정리</span></div><div class="org-box org-spec" style="left:556px;top:380px;width:400px;height:140px"><b>✍️ 글담</b><span>인스타 글 초안 쓰기</span></div>
-<p class="org-base">바탕: 내 VPS(오픈클로) · 내 PC(노드 연결) · HIA 기록</p>
-</div><div class="card perms"><h3>권한 3단계</h3><div class="perm p-auto"><p class="perm-label">자율 — 그냥 해도 됨</p><p>주문 표 정리, 글 초안, 재고 메모</p></div><div class="perm p-approve"><p class="perm-label">승인 — 내가 OK 해야 함</p><p>손님에게 보내는 답장, 인스타 올리기</p></div><div class="perm p-never"><p class="perm-label">금지 — 절대 안 됨</p><p>결제·환불, 가격 바꾸기, 거래처 발주</p></div></div></div></section>
-<section class="slide " data-key="members"><header class="hd"><p class="eyebrow">② 팀 멤버 소개</p><h2 class="title">같이 일하고 싶은 사람으로 만들었습니다</h2></header><div class="members" style="grid-template-columns:repeat(3,1fr)"><div class="card member lead"><p class="kind">총괄</p><h3 class="mname">🌷 봄이</h3><div class="mfields"><p><b>관계</b> 10년 같이 일한 실장님</p><p><b>말투</b> 존댓말, 결론부터</p><p><b>싫어하는 것</b> 확인 없이 &quot;끝났어요&quot;</p><p><b>첫 과제</b> 아침 8시 오늘 할 일 보고</p></div></div><div class="card member "><p class="kind">전문가</p><h3 class="mname">📋 다온</h3><div class="mfields"><p><b>관계</b> 꼼꼼한 막내 직원</p><p><b>말투</b> 짧게, 표로</p><p><b>싫어하는 것</b> 픽업 시간 빠진 주문</p><p><b>첫 과제</b> 지난주 주문 표로 정리</p></div></div><div class="card member "><p class="kind">전문가</p><h3 class="mname">✍️ 글담</h3><div class="mfields"><p><b>관계</b> 감성 있는 단골 손님</p><p><b>말투</b> 따뜻한 존댓말</p><p><b>싫어하는 것</b> 과장 광고 문구</p><p><b>첫 과제</b> 이번 주 꽃 소개 글 3개</p></div></div></div></section>
-<section class="slide " data-key="selfintro"><header class="hd"><p class="eyebrow">② 총괄 자기소개 확인</p><h2 class="title">&quot;네 소개 해줘&quot;에 봄이가 한 말</h2></header><div class="row">
+<section class="slide s-agenda" data-key="agenda"><header class="hd"><p class="eyebrow">발표 순서</p><h2 class="title">오늘 여섯 가지 이야기를 할게요</h2></header><div class="agenda" style="grid-template-columns:repeat(3,1fr)"><div class="card agenda-item"><p class="num">01</p><h3>참여 동기</h3><p class="muted">왜 이 과정에 왔는지</p></div><div class="card agenda-item"><p class="num">02</p><h3>내가 생각하는 에이전트 팀</h3><p class="muted">업무 지도와 팀 구조</p></div><div class="card agenda-item"><p class="num">03</p><h3>팀 멤버 소개</h3><p class="muted">지금의 동료와 4주 뒤 모습</p></div><div class="card agenda-item"><p class="num">04</p><h3>대시보드와 가상 오피스</h3><p class="muted">나만의 메뉴·위젯과 우리 사무실</p></div><div class="card agenda-item"><p class="num">05</p><h3>1주차 소감</h3><p class="muted">막힌 곳과 놀란 순간</p></div><div class="card agenda-item"><p class="num">06</p><h3>한 달 뒤의 나</h3><p class="muted">완성하고 싶은 것과 다짐</p></div></div></section>
+<section class="slide s-quote" data-key="motivation"><header class="hd"><p class="eyebrow">참여 동기</p></header>
+<div class="quote-wrap "><p class="qmark">“</p><h2 class="quote">가게 문을 닫고 나서야<br>내 시간이 시작되는 게 싫었어요</h2><p class="qwhy">밤마다 카톡 주문을 정리하다 보면 하루가 끝나 있었어요. 꽃을 만지는 시간보다 메시지를 보는 시간이 더 길었고요. 일을 나눠 줄 동료가 필요했어요.</p><div class="chips"><span class="pill">밤 11시까지 주문 정리</span><span class="pill">인스타는 늘 밀려 있음</span><span class="pill">꽃 고를 시간이 부족</span></div></div><aside>밤마다 주문 정리하다 하루가 끝나는 게 제일 힘들었어요.</aside></section>
+<section class="slide " data-key="workmap"><header class="hd"><p class="eyebrow">① 내가 생각하는 에이전트 팀</p><h2 class="title">팀은 업무 지도에서 시작했습니다</h2><p class="lead">한 주 동안 내가 한 일을 적어 보니, 시간이 가장 많이 새는 곳이 보였어요.</p></header><div class="stack"><table class="tbl"><thead><tr><th>내가 하던 일</th><th>얼마나 자주</th><th>걸리는 시간</th><th>맡기고 싶은 마음</th><th>맡길 동료</th></tr></thead><tbody><tr><td><b>카톡·전화 주문 받아 정리하기</b></td><td>매일</td><td>1시간</td><td><span class="meter" style="--v:5"><i></i></span> 5/5</td><td>다온</td></tr><tr><td><b>인스타 꽃 사진 글 쓰기</b></td><td>주 3회</td><td>40분</td><td><span class="meter" style="--v:4"><i></i></span> 4/5</td><td>글담</td></tr><tr><td><b>거래처 입고·재고 확인</b></td><td>주 2회</td><td>30분</td><td><span class="meter" style="--v:3"><i></i></span> 3/5</td><td>봄이</td></tr></tbody></table><div class="band"><span class="chip">이건 내가 할래요</span><p>꽃 고르기와 손님 상담. 이건 제가 가게를 하는 이유라서요.</p></div><p class="insight">하루 한 시간씩 쓰던 주문 정리를 맡기면, 일주일에 7시간이 생겨요.</p></div><aside>제일 시간을 많이 잡아먹는 게 카톡 주문 정리였어요. 그래서 첫 번째 직원은 주문 담당입니다.</aside></section>
+<section class="slide s-tight" data-key="structure"><header class="hd"><p class="eyebrow">① 우리 팀 구조</p><h2 class="title">나는 방향만, 봄이가 일을 나눠 줘요</h2><p class="lead">저는 봄이에게만 말하고, 봄이가 알맞은 동료에게 일을 넘겨요.</p></header><div class="col-gap"><div class="row org-row"><div class="org compact" style="width:900px;height:374px">
+<svg class="org-lines" width="900" height="374" viewBox="0 0 900 374" aria-hidden="true"><line x1="450" y1="96" x2="450" y2="130"/><line x1="450" y1="226" x2="450" y2="248"/><line x1="258" y1="248" x2="642" y2="248"/><line x1="258" y1="248" x2="258" y2="270"/><line x1="642" y1="248" x2="642" y2="270"/></svg>
+<div class="org-box org-me" style="left:230px;top:0px;width:440px;height:96px"><b>나 · 김하늘</b><span>방향을 정하고 확인해요</span></div>
+<div class="org-box org-lead" style="left:210px;top:130px;width:480px;height:96px"><b>🌷 봄이</b><span>일 나누기 · 아침 보고</span></div>
+<div class="org-box org-spec" style="left:78px;top:270px;width:360px;height:104px"><b>📋 다온</b><span>주문을 표로 정리</span></div><div class="org-box org-spec" style="left:462px;top:270px;width:360px;height:104px"><b>✍️ 글담</b><span>인스타 글 초안</span></div>
+</div><div class="flow"><p class="flow-title">일이 흘러가는 순서</p><ol><li>제가 봄이에게 &quot;오늘 주문 정리해 줘&quot;라고 말해요</li><li>봄이가 다온에게 주문 정리를 넘겨요</li><li>다온이 픽업 시간순으로 표를 만들어요</li><li>봄이가 확인하고 아침 8시에 3줄로 보고해요</li><li>손님에게 보낼 답장은 제가 보고 OK 해요</li></ol></div></div><div class="perms-band"><p class="perms-title">일을 맡길 때의 약속</p><div class="perms-cols"><div class="perm p-auto"><p class="perm-label">혼자 해도 돼요</p><ul><li>주문을 표로 정리하기</li><li>인스타 글 초안 쓰기</li><li>재고 메모 남기기</li></ul></div><div class="perm p-approve"><p class="perm-label">나에게 먼저 물어봐요</p><ul><li>손님에게 답장 보내기</li><li>인스타에 글 올리기</li></ul></div><div class="perm p-never"><p class="perm-label">절대 하지 않아요</p><ul><li>결제·환불 처리</li><li>꽃값 바꾸기</li><li>거래처에 발주 넣기</li></ul></div></div></div></div></section>
+<section class="slide " data-key="members"><header class="hd"><p class="eyebrow">② 팀 멤버 소개</p><h2 class="title">같이 일하고 싶은 사람으로 만들었습니다</h2><p class="lead">인터뷰에서 정한 관계와 말투 덕분에, 진짜 동료에게 말하듯 일을 맡기게 됐어요.</p></header><div class="members" style="grid-template-columns:repeat(3,1fr)"><div class="card member lead ">
+<div class="mtop"><img class="mface" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/star-front.png" alt=""><div><p class="kind">총괄</p><h3 class="mname">봄이</h3></div></div>
+<div class="mfields"><div class="mf"><span>나와의 관계</span><p>10년 같이 일한 실장님</p></div><div class="mf"><span>말투</span><p>존댓말, 결론부터</p></div><div class="mf"><span>싫어하는 것</span><p>확인 없이 &quot;끝났어요&quot;</p></div><div class="mf"><span>처음 맡긴 일</span><p>아침 8시 오늘 할 일 보고</p></div></div>
+<p class="mquote">“사장님, 오늘 픽업 6건이에요. 11시 장미 꽃다발부터 챙길게요.”</p></div><div class="card member  ">
+<div class="mtop"><img class="mface" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/laptop-front.png" alt=""><div><p class="kind">전문가</p><h3 class="mname">다온</h3></div></div>
+<div class="mfields"><div class="mf"><span>나와의 관계</span><p>꼼꼼한 막내 직원</p></div><div class="mf"><span>말투</span><p>짧게, 표로</p></div><div class="mf"><span>싫어하는 것</span><p>픽업 시간 빠진 주문</p></div><div class="mf"><span>처음 맡긴 일</span><p>지난주 주문 표로 정리</p></div></div>
+<p class="mquote">“픽업 시간 빠진 주문 2건, 손님께 여쭤봐야 해요.”</p></div><div class="card member  ">
+<div class="mtop"><img class="mface" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/pen-front.png" alt=""><div><p class="kind">전문가</p><h3 class="mname">글담</h3></div></div>
+<div class="mfields"><div class="mf"><span>나와의 관계</span><p>감성 있는 단골 손님</p></div><div class="mf"><span>말투</span><p>따뜻한 존댓말</p></div><div class="mf"><span>싫어하는 것</span><p>과장 광고 문구</p></div><div class="mf"><span>처음 맡긴 일</span><p>이번 주 꽃 소개 글 3개</p></div></div>
+<p class="mquote">“이번 주 소국 사진으로 따뜻한 글 하나 써 볼게요.”</p></div></div></section>
+<section class="slide " data-key="selfintro"><header class="hd"><p class="eyebrow">② 총괄 자기소개</p><h2 class="title">&quot;네 소개 해줘&quot;에 봄이가 한 말</h2></header><div class="row">
 <div class="chat card"><p class="bubble me">네 소개 해줘</p><p class="bubble bot">사장님, 저는 오늘꽃 총괄 봄이예요. 아침 8시에 주문과 재고를 정리해서 먼저 말씀드릴게요. 손님께 나가는 말은 꼭 사장님 확인을 받고 보낼게요.</p></div>
-<div class="checks"><h3>인터뷰대로 나왔나?</h3><p class="check ok"><span>맞음</span>이름·호칭</p><p class="check ok"><span>맞음</span>존댓말·결론부터</p><p class="check ok"><span>맞음</span>승인 경계를 스스로 말함</p><p class="check no"><span>고침</span>말이 길다</p><p class="fix">SOUL.md에 &quot;보고는 3줄 이내&quot; 한 줄 추가</p></div></div></section>
-<section class="slide " data-key="futureteam"><header class="hd"><p class="eyebrow">② 앞으로 구성하고 싶은 팀</p><h2 class="title">4주 뒤엔 가게 밖 일까지 맡기고 싶어요</h2></header><div class="timeline" style="grid-template-columns:repeat(4,1fr)"><div class="step now"><p class="when">지금 · 1주차</p><h3>3명</h3><p class="muted">봄이 · 다온 · 글담<br>가게 안 일 정리</p></div><div class="step "><p class="when">2주차</p><h3>+ 연락 담당</h3><p class="muted">아침에 카톡 주문 모아 보고, 내가 OK 하면 답장</p></div><div class="step "><p class="when">3주차</p><h3>글담 → 발행까지</h3><p class="muted">인스타·블로그 초안을 승인 후 발행</p></div><div class="step "><p class="when">4주차</p><h3>+ 쇼핑몰 MD · 검수</h3><p class="muted">꽃 정기구독 상품 등록, 다른 직원이 검수</p></div></div><p class="principle">원칙 — <b>손님에게 닿는 일은 끝까지 내가 승인</b></p></section>
-<section class="slide s-dash" data-key="dashboard"><header class="hd"><p class="eyebrow">③ 대시보드 리뷰</p><h2 class="title">열자마자 &quot;오늘 픽업&quot;이 보입니다</h2></header><div class="row dash-row"><div class="shot-wrap"><div class="mini">
-<div class="mini-side"><p class="mini-logo">💐 오늘꽃 AI 오피스</p><p class="mini-group">내 업무</p><p class="mini-item">오늘 꽃다발 주문<span>다온</span></p><p class="mini-item">인스타 글감<span>글담</span></p><p class="mini-item">거래처 입고<span>봄이</span></p><p class="mini-group">기본 메뉴</p><p class="mini-item">업무현황<span>봄이</span></p><p class="mini-item">팀관리<span>봄이</span></p><p class="mini-item">이메일</p><p class="mini-item">글감실<span>글담</span></p><p class="mini-item">나의 메모<span>다온</span></p></div>
+<div class="checks"><h3>내가 정한 대로 나왔을까?</h3><p class="check ok"><span>맞아요</span>이름·호칭</p><p class="check ok"><span>맞아요</span>존댓말·결론부터</p><p class="check ok"><span>맞아요</span>승인 경계를 스스로 말함</p><p class="check no"><span>고쳤어요</span>말이 길다</p><p class="fix">SOUL.md에 &quot;보고는 3줄 이내&quot; 한 줄 추가</p></div></div></section>
+<section class="slide " data-key="futureteam"><header class="hd"><p class="eyebrow">② 앞으로 만들 팀</p><h2 class="title">4주 뒤엔 가게 밖 일까지 맡기고 싶어요</h2><p class="lead">2주차부터 연결이 하나씩 늘어나면, 맡길 수 있는 일도 함께 늘어나요.</p></header><div class="timeline" style="grid-template-columns:repeat(4,1fr)"><div class="step now"><p class="when">지금 · 1주차</p><h3>3명</h3><p class="muted">봄이 · 다온 · 글담<br>가게 안 일 정리</p></div><div class="step "><p class="when">2주차</p><h3>+ 연락 담당</h3><p class="muted">아침에 카톡 주문 모아 보고, 내가 OK 하면 답장</p></div><div class="step "><p class="when">3주차</p><h3>글담 → 발행까지</h3><p class="muted">인스타·블로그 초안을 승인 후 발행</p></div><div class="step "><p class="when">4주차</p><h3>+ 쇼핑몰 MD · 검수</h3><p class="muted">꽃 정기구독 상품 등록, 다른 직원이 검수</p></div></div><p class="principle">우리 팀의 원칙 — <b>손님에게 닿는 일은 끝까지 내가 승인</b></p></section>
+<section class="slide s-dash" data-key="dashboard"><header class="hd"><p class="eyebrow">③ 대시보드 리뷰</p><h2 class="title">열자마자 &quot;오늘 픽업&quot;이 보입니다</h2><p class="lead">아침에 대시보드를 열면 오늘 무엇부터 해야 하는지 바로 보여요.</p></header><div class="row dash-row"><div class="mini ">
+<div class="mini-side"><p class="mini-logo">💐 오늘꽃 AI 오피스</p><p class="mini-group">내 업무</p><p class="mini-item">오늘 꽃다발 주문<span>다온</span></p><p class="mini-item">인스타 글감<span>글담</span></p><p class="mini-item">거래처 입고<span>봄이</span></p><p class="mini-group">기본 메뉴</p><p class="mini-item">업무현황<span>봄이</span></p><p class="mini-item">팀관리<span>봄이</span></p><p class="mini-item">이메일</p><p class="mini-item">글감실<span>글담</span></p><p class="mini-item">나의 메모<span>다온</span></p><p class="mini-item">설정</p></div>
 <div class="mini-main"><p class="mini-name">오늘꽃 AI 오피스</p><p class="mini-tag">꽃은 내가, 나머지는 팀이</p>
-<div class="mini-tiles"><div class="mini-tile"><b>오늘 꽃다발 주문</b><span>6건 진행 중 · 다온</span></div><div class="mini-tile"><b>인스타 글감</b><span>3건 진행 중 · 글담</span></div><div class="mini-tile"><b>거래처 입고</b><span>2건 진행 중 · 봄이</span></div><div class="mini-tile"><b>업무현황</b><span>3건 진행 중 · 봄이</span></div><div class="mini-tile"><b>팀관리</b><span>0건 진행 중 · 봄이</span></div><div class="mini-tile"><b>이메일</b><span>0건 진행 중</span></div></div><div class="mini-widget"><p class="mini-wtitle">오늘 픽업 레이더</p><div class="mini-wbody"><div><p class="mini-blabel">오늘 꽃다발 주문 · 남은 일</p><p class="mini-big">6건</p><p class="mini-sub">가장 먼저: 결혼기념일 장미 꽃다발 · 11:00</p><div class="mini-bars"><div class="mini-bar"><span>접수</span><i><em style="width:100%"></em></i><b>3</b></div><div class="mini-bar"><span>만드는 중</span><i><em style="width:66.66666666666666%"></em></i><b>2</b></div><div class="mini-bar"><span>픽업 대기</span><i><em style="width:33.33333333333333%"></em></i><b>1</b></div><div class="mini-bar"><span>전달 완료</span><i><em style="width:33.33333333333333%"></em></i><b>1</b></div></div></div><ul class="mini-list"><li class="first"><b>결혼기념일 장미 꽃다발</b><span>11:00 · 만드는 중</span></li><li class=""><b>개업 축하 화분</b><span>12:30 · 접수</span></li><li class=""><b>졸업 꽃다발(소)</b><span>14:00 · 접수</span></li><li class=""><b>생일 미니 꽃바구니</b><span>15:30 · 픽업 대기</span></li></ul></div></div></div></div><p class="shot-note">대시보드 데이터(config·seed)로 다시 그린 화면</p></div><div class="callouts"><div><p class="callout-t">❶ 내 업무 메뉴</p><p class="muted">&quot;주문관리&quot; 대신 평소 쓰는 말 &quot;오늘 꽃다발 주문&quot;. 상태도 접수 → 만드는 중 → 픽업 대기.</p></div><div><p class="callout-t">❷ 나의 위젯</p><p class="muted">알고 싶은 숫자: 오늘 남은 픽업.<br>보고 할 행동: 가장 이른 것부터 만들기.</p></div><div><p class="callout-t">❸ 홈 한 줄</p><p class="muted">&quot;꽃은 내가, 나머지는 팀이&quot; — 이 팀을 만든 이유.</p></div></div></div><aside>아침에 이 숫자 하나만 봐요. 오늘 남은 픽업, 제일 이른 것부터 만듭니다.</aside></section>
-<section class="slide " data-key="review"><header class="hd"><p class="eyebrow">③ 써 보니</p><h2 class="title">사흘 써 본 솔직한 리뷰</h2></header><div class="two"><div class="card rv good"><h3>좋았던 점</h3><ul><li>아침에 위젯 하나로 오늘 일이 정리됨</li><li>메뉴 이름을 내 말로 바꾸니 담당이 헷갈리지 않음</li><li>기록 3개를 비서에게 시켰더니 표로 알아서 넣음</li></ul></div><div class="card rv bad"><h3>아쉬운 점</h3><ul><li>주문은 아직 내가 손으로 입력 (카톡 연결 전)</li><li>이메일·글감실은 빈칸</li><li>기록이 없으면 위젯이 0으로만 보임</li></ul></div></div></section>
-<section class="slide " data-key="futuredash"><header class="hd"><p class="eyebrow">③ 앞으로 구성하고 싶은 대시보드</p><h2 class="title">빈 메뉴가 하나씩 채워지는 계획</h2></header><div class="stack"><table class="tbl"><thead><tr><th>언제</th><th>추가·채울 메뉴</th><th>무엇이 보이나</th><th>담당</th></tr></thead><tbody><tr><td>2주차</td><td>카톡관리</td><td>아침에 모인 주문 문의</td><td>연락 담당(신규)</td></tr><tr><td>3주차</td><td>글감실 · 최신정보</td><td>이번 주 꽃 글 초안, 발행 상태</td><td>글담</td></tr><tr><td>4주차</td><td>쇼핑몰 매물조사 · 쿠폰관리</td><td>정기구독 상품과 반응</td><td>쇼핑몰 MD(신규)</td></tr></tbody></table><div class="band"><span class="chip">위젯 다음 버전</span><p>&quot;오늘 픽업&quot; 옆에 &quot;내 승인 기다리는 일 n건&quot; 추가</p></div></div></section>
-<section class="slide s-office" data-key="office"><header class="hd"><p class="eyebrow">가상 오피스</p><h2 class="title">봄이네 팀이 일하는 작은 꽃집 사무실</h2></header><div class="row dash-row"><div class="vo-stage" style="width:1180px;height:664px;background-image:url('https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/bg/diorama.jpg')"><div class="vo-actor ghost" style="left:46.5%;top:36.5%"><span class="vo-tag">채용 예정 · 연락 담당</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/coffee-back.png" alt="" style="height:71px"></div><div class="vo-actor" style="left:33%;top:41%"><span class="vo-tag">글담</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/pen-back.png" alt="" style="height:73px"></div><div class="vo-actor" style="left:63.5%;top:52%"><span class="vo-tag">다온</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/laptop-back.png" alt="" style="height:77px"></div><div class="vo-actor" style="left:54%;top:57%"><span class="vo-tag">봄이</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/star-back.png" alt="" style="height:79px"></div><div class="vo-actor ghost" style="left:36%;top:61%"><span class="vo-tag">채용 예정 · 쇼핑몰 MD</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/palette-front.png" alt="" style="height:80px"></div></div><div class="callouts vo-side">
-<div><p class="callout-t">디오라마 스튜디오</p><p class="muted">조용한 공방 같은 분위기가 우리 가게와 닮아서 디오라마 스튜디오를 골랐어요.</p></div>
-<div><p class="callout-t">지금 일하는 팀</p><p class="muted">봄이 · 총괄<br>다온 · 주문<br>글담 · 콘텐츠</p></div>
-<div><p class="callout-t">다음에 앉힐 사람</p><p class="muted">연락 담당 — 2주차 · 카톡 주문 모으기<br>쇼핑몰 MD — 4주차 · 정기구독</p></div>
+<div class="mini-tiles"><div class="mini-tile"><i class="mini-ic">오</i><b>오늘 꽃다발 주문</b><span>6건 진행 중 · 다온</span></div><div class="mini-tile"><i class="mini-ic">인</i><b>인스타 글감</b><span>3건 진행 중 · 글담</span></div><div class="mini-tile"><i class="mini-ic">거</i><b>거래처 입고</b><span>2건 진행 중 · 봄이</span></div><div class="mini-tile"><i class="mini-ic">업</i><b>업무현황</b><span>3건 진행 중 · 봄이</span></div><div class="mini-tile"><i class="mini-ic">팀</i><b>팀관리</b><span>0건 진행 중 · 봄이</span></div><div class="mini-tile"><i class="mini-ic">이</i><b>이메일</b><span>0건 진행 중</span></div></div><div class="mini-widget"><p class="mini-wtitle">오늘 픽업 레이더</p><div class="mini-wbody"><div><p class="mini-blabel">오늘 꽃다발 주문 · 남은 일</p><p class="mini-big">6건</p><p class="mini-sub">가장 먼저: 결혼기념일 장미 꽃다발 · 11:00</p><div class="mini-bars"><div class="mini-bar"><span>접수</span><i><em style="width:100%"></em></i><b>3</b></div><div class="mini-bar"><span>만드는 중</span><i><em style="width:66.66666666666666%"></em></i><b>2</b></div><div class="mini-bar"><span>픽업 대기</span><i><em style="width:33.33333333333333%"></em></i><b>1</b></div><div class="mini-bar"><span>전달 완료</span><i><em style="width:33.33333333333333%"></em></i><b>1</b></div></div></div><ul class="mini-list"><li class="first"><b>결혼기념일 장미 꽃다발</b><span>11:00 · 만드는 중</span></li><li class=""><b>개업 축하 화분</b><span>12:30 · 접수</span></li><li class=""><b>졸업 꽃다발(소)</b><span>14:00 · 접수</span></li><li class=""><b>생일 미니 꽃바구니</b><span>15:30 · 픽업 대기</span></li></ul></div></div></div></div><div class="callouts"><div><p class="callout-t"><span class="cnum">1</span>내 업무 메뉴</p><p class="muted">&quot;주문관리&quot; 대신 평소 쓰는 말 &quot;오늘 꽃다발 주문&quot;. 상태도 접수 → 만드는 중 → 픽업 대기.</p></div><div><p class="callout-t"><span class="cnum">2</span>나의 위젯</p><p class="muted">알고 싶은 숫자: 오늘 남은 픽업.<br>보고 할 행동: 가장 이른 것부터 만들기.</p></div><div><p class="callout-t"><span class="cnum">3</span>홈 한 줄</p><p class="muted">&quot;꽃은 내가, 나머지는 팀이&quot; — 이 팀을 만든 이유.</p></div></div></div><aside>아침에 이 숫자 하나만 봐요. 오늘 남은 픽업, 제일 이른 것부터 만듭니다.</aside></section>
+<section class="slide " data-key="review"><header class="hd"><p class="eyebrow">③ 써 보니</p><h2 class="title">사흘 써 본 솔직한 리뷰</h2><p class="lead">사흘 동안 아침마다 열어 보면서 느낀 점이에요.</p></header><div class="two"><div class="card rv good"><h3>좋았던 점</h3><ul><li>아침에 위젯 하나로 오늘 일이 정리됨</li><li>메뉴 이름을 내 말로 바꾸니 담당이 헷갈리지 않음</li><li>기록 3개를 비서에게 시켰더니 표로 알아서 넣음</li></ul></div><div class="card rv bad"><h3>아쉬운 점</h3><ul><li>주문은 아직 내가 손으로 입력 (카톡 연결 전)</li><li>이메일·글감실은 빈칸</li><li>기록이 없으면 위젯이 0으로만 보임</li></ul></div></div></section>
+<section class="slide " data-key="futuredash"><header class="hd"><p class="eyebrow">③ 앞으로 만들 대시보드</p><h2 class="title">빈 메뉴가 하나씩 채워지는 계획</h2><p class="lead">담당 동료가 생기는 순서대로 빈 메뉴를 채워 갈 거예요.</p></header><div class="stack"><table class="tbl"><thead><tr><th>언제</th><th>채울 메뉴</th><th>무엇이 보이게</th><th>맡을 동료</th></tr></thead><tbody><tr><td><b>2주차</b></td><td>카톡관리</td><td>아침에 모인 주문 문의</td><td>연락 담당(신규)</td></tr><tr><td><b>3주차</b></td><td>글감실 · 최신정보</td><td>이번 주 꽃 글 초안, 발행 상태</td><td>글담</td></tr><tr><td><b>4주차</b></td><td>쇼핑몰 매물조사 · 쿠폰관리</td><td>정기구독 상품과 반응</td><td>쇼핑몰 MD(신규)</td></tr></tbody></table><div class="band"><span class="chip">위젯 다음 버전</span><p>&quot;오늘 픽업&quot; 옆에 &quot;내 승인 기다리는 일 n건&quot; 추가</p></div></div></section>
+<section class="slide s-office" data-key="office"><header class="hd"><p class="eyebrow">가상 오피스</p><h2 class="title">봄이네 팀이 일하는 작은 꽃집 사무실</h2></header>
+<div class="row dash-row"><div class="vo-stage" style="width:1180px;height:664px;background-image:url('https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/bg/diorama.jpg')"><div class="vo-actor ghost" style="left:46.5%;top:36.5%"><span class="vo-tag">연락 담당</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/coffee-back.png" alt="" style="height:71px"></div><div class="vo-actor" style="left:33%;top:41%"><span class="vo-tag">글담</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/pen-back.png" alt="" style="height:73px"></div><div class="vo-actor" style="left:63.5%;top:52%"><span class="vo-tag">다온</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/laptop-back.png" alt="" style="height:77px"></div><div class="vo-actor" style="left:54%;top:57%"><span class="vo-tag">봄이</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/star-back.png" alt="" style="height:79px"></div><div class="vo-actor ghost" style="left:36%;top:61%"><span class="vo-tag">쇼핑몰 MD</span><img src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/palette-front.png" alt="" style="height:80px"></div></div><div class="vo-side">
+<div class="vo-badge"><small>고른 사무실</small><b>디오라마 스튜디오</b><p>3D 미니어처 칸막이 사무실에서 펠트 인형 동료들이 조용히 일해요. 공방이나 작은 가게 같은 아늑한 분위기예요.</p></div>
+<div><p class="callout-t">이 사무실을 고른 이유</p><p class="muted">조용한 공방 같은 분위기가 우리 가게와 닮아서 골랐어요. 아침에 켜 두면 동료들이 일하는 모습이 보여서 든든해요.</p></div>
+<div class="vo-count"><div><b>3</b><span>지금 일하는 동료</span></div><div><b>2</b><span>곧 올 동료</span></div></div>
+<p class="vo-legend"><i></i>반투명한 자리는 앞으로 함께할 동료의 자리예요</p>
 </div></div><aside>봄이 자리 옆 빈 책상 보이시죠? 다음 주엔 여기에 연락 담당을 앉힐 거예요.</aside></section>
-<section class="slide s-feel dark" data-key="feelings"><header class="hd"><p class="eyebrow">④ 1주차 소감</p><h2 class="title big-quote">직원을 뽑는 일은 결국<br>내 일을 다시 들여다보는 일이었다</h2></header><div class="fgrid"><div class="card fbox"><p class="flabel">막힌 곳</p><p>PC 연결에서 이틀. 헬프데스크에 단계 번호로 물어보니 10분 만에 해결</p></div><div class="card fbox"><p class="flabel">놀란 순간</p><p>봄이가 &quot;이건 사장님 확인이 필요해요&quot; 하고 스스로 멈췄을 때</p></div><div class="card fbox"><p class="flabel">다음 주에 맡길 일</p><p>아침 8시, 밤사이 들어온 카톡 주문 모아서 보고받기</p></div></div><aside>봄이가 스스로 멈춘 순간이 제일 놀라웠어요.</aside></section>
-<section class="slide " data-key="goal"><header class="hd"><p class="eyebrow">한 달 뒤 완성하고 싶은 것</p><h2 class="title">한 달 뒤, 아침 8시면<br>오늘 할 일이 저절로 정리되어 있는 가게</h2></header><div class="goals" style="grid-template-columns:repeat(3,1fr)"><div class="card goal"><p class="gnum">01</p><p>카톡 주문이 밤사이 자동으로 모여 아침 보고로 온다</p></div><div class="card goal"><p class="gnum">02</p><p>인스타 글이 주 3회, 내 승인만으로 올라간다</p></div><div class="card goal"><p class="gnum">03</p><p>꽃 정기구독 상품이 온라인에 열려 있다</p></div></div></section>
-<section class="slide s-pledge dark" data-key="pledge"><header class="hd"><p class="eyebrow">다짐과 선언</p></header><div class="pledge"><ol class="plist"><li>매일 아침 봄이의 보고를 3분 안에 승인한다</li><li>막히면 혼자 붙잡지 않고 헬프데스크에 단계 번호로 묻는다</li><li>손님에게 닿는 일은 끝까지 내가 확인한다</li></ol><h2 class="declare">나는 4주 뒤,<br>꽃에만 집중하는 사장이 되겠습니다.</h2><div class="sign"><span>김하늘</span><i></i><span>2026-10-29</span></div></div><aside>마지막으로 선언하겠습니다. 나는 4주 뒤, 꽃에만 집중하는 사장이 되겠습니다.</aside></section>
+<section class="slide " data-key="officeteam"><header class="hd"><p class="eyebrow">가상 오피스 · 자리 소개</p><h2 class="title">사무실에 누가 앉아 있을까요</h2><p class="lead">책상마다 하는 일이 정해져 있어요. 빈 책상에는 곧 새 동료가 와요.</p></header><div class="seats" style="grid-template-columns:repeat(3,1fr)"><div class="card seat"><img class="seat-face" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/star-front.png" alt=""><div class="seat-body"><p class="kind">총괄</p><h3>봄이</h3><ul><li>아침 8시 오늘 할 일 보고</li><li>주문과 재고 함께 확인</li></ul></div></div><div class="card seat"><img class="seat-face" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/laptop-front.png" alt=""><div class="seat-body"><p class="kind">주문</p><h3>다온</h3><ul><li>픽업 시간순 주문표</li><li>빠진 정보 손님께 확인 요청</li></ul></div></div><div class="card seat"><img class="seat-face" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/pen-front.png" alt=""><div class="seat-body"><p class="kind">콘텐츠</p><h3>글담</h3><ul><li>이번 주 꽃 소개 글 3개</li><li>사진에 어울리는 짧은 문구</li></ul></div></div><div class="card seat ghost"><img class="seat-face" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/coffee-front.png" alt=""><div class="seat-body"><p class="kind">곧 올 동료</p><h3>연락 담당</h3><p class="muted">2주차 · 밤사이 카톡 주문 모으기</p></div></div><div class="card seat ghost"><img class="seat-face" src="https://cdn.jsdelivr.net/gh/IrumHahn/openclaw-virtual-office@main/web/chars/felt/palette-front.png" alt=""><div class="seat-body"><p class="kind">곧 올 동료</p><h3>쇼핑몰 MD</h3><p class="muted">4주차 · 꽃 정기구독 상품 열기</p></div></div></div></section>
+<section class="slide s-feel dark" data-key="feelings"><header class="hd"><p class="eyebrow">④ 1주차 소감</p><h2 class="title big-quote">직원을 뽑는 일은 결국<br>내 일을 다시 들여다보는 일이었다</h2><p class="lead">첫날은 설치 화면만 보다가 하루가 갔어요. 그런데 봄이가 처음으로 &quot;사장님, 오늘 할 일이에요&quot;라고 보고했을 때, 정말 팀이 생긴 느낌이 들었어요.</p></header>
+<div class="fgrid n3"><div class="card fbox"><p class="flabel">막힌 곳</p><p>PC 연결에서 이틀. 헬프데스크에 단계 번호로 물어보니 10분 만에 해결</p></div><div class="card fbox"><p class="flabel">놀란 순간</p><p>봄이가 &quot;이건 사장님 확인이 필요해요&quot; 하고 스스로 멈췄을 때</p></div><div class="card fbox"><p class="flabel">다음 주에 맡길 일</p><p>아침 8시, 밤사이 들어온 카톡 주문 모아서 보고받기</p></div></div><aside>봄이가 스스로 멈춘 순간이 제일 놀라웠어요.</aside></section>
+<section class="slide " data-key="goal"><header class="hd"><p class="eyebrow">한 달 뒤 완성하고 싶은 것</p><h2 class="title">한 달 뒤, 아침 8시면<br>오늘 할 일이 저절로 정리되어 있는 가게</h2><p class="lead">꽃을 고르고 손님을 만나는 시간을 지금의 두 배로 늘리고 싶어요.</p></header><div class="stack">
+<div class="goals" style="grid-template-columns:repeat(3,1fr)"><div class="card goal"><p class="gnum">01</p><p>밤사이 카톡 주문이 모여 아침 보고로 와요</p></div><div class="card goal"><p class="gnum">02</p><p>인스타 글이 주 3회, 내 확인만으로 올라가요</p></div><div class="card goal"><p class="gnum">03</p><p>꽃 정기구독 상품이 온라인에 열려 있어요</p></div></div>
+<div class="road"><div class="road-step"><b>2주차</b><p>카톡 주문 아침 보고 받기</p></div><i class="road-arrow">→</i><div class="road-step"><b>3주차</b><p>인스타 글 주 3회 올리기</p></div><i class="road-arrow">→</i><div class="road-step"><b>4주차</b><p>정기구독 상품 열기</p></div></div></div></section>
+<section class="slide s-pledge dark" data-key="pledge"><header class="hd"><p class="eyebrow">다짐과 선언</p></header><div class="pledge "><ol class="plist"><li>매일 아침 봄이의 보고를 3분 안에 승인한다</li><li>막히면 혼자 붙잡지 않고 헬프데스크에 단계 번호로 묻는다</li><li>손님에게 닿는 일은 끝까지 내가 확인한다</li></ol><h2 class="declare">나는 4주 뒤,<br>꽃에만 집중하는 사장이 되겠습니다.</h2><div class="sign"><span>김하늘</span><i></i><span>2026-10-29</span></div></div><aside>마지막으로 선언하겠습니다. 나는 4주 뒤, 꽃에만 집중하는 사장이 되겠습니다.</aside></section>
 <section class="slide s-close dark" data-key="closing"><div class="close"><h2 class="cover-title">감사합니다</h2><p class="cover-sub">카톡 주문 정리, 먼저 해 보신 분 조언 부탁드려요!</p><p class="muted">김하늘</p></div></section>
 </div>
 <div id="ui"><div id="bar"></div></div><div id="num"></div><div id="help">← → 넘기기 · F 전체화면 · N 노트</div><div id="notes"></div>

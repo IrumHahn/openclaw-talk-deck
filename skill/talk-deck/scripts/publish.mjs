@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 발표 HTML 을 베이스캠프 발표장에 올린다. 같은 주차에 다시 올리면 덮어쓴다(수정 가능).
 //   node publish.mjs --deck deck.html --title "제목" --theme botanical [--week 1] [--presenter 이름] [--dry-run]
-// 토큰: 환경변수 RUN_ACADEMY_PLAZA_TOKEN (광장 에이전트 토큰 rap_s4_…) → --token-file → ~/.config/run-academy/plaza-token 순. 토큰은 출력하지 않는다.
+// 토큰: 환경변수 RUN_ACADEMY_PLAZA_TOKEN (광장 에이전트 토큰 rap_s4_…) → --token-file → ~/.config/run-academy/plaza-token → ~/.run-academy/plaza/plaza.env 순. 토큰은 출력하지 않는다.
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
@@ -41,7 +41,9 @@ async function main() {
   if (o.dryRun) { console.log(JSON.stringify({ ok: true, dryRun: true, endpoint: `${o.base}/api/talk-deck`, week: o.week, title: body.title, theme, bytes }, null, 2)); return }
   const fallback = path.join(os.homedir(), '.config', 'run-academy', 'plaza-token')
   const readToken = file => { try { return fs.readFileSync(file, 'utf8') } catch { return '' } }
-  const token = (process.env.RUN_ACADEMY_PLAZA_TOKEN || (o.tokenFile ? readToken(o.tokenFile) : '') || readToken(fallback)).trim()
+  // 광장 스킬 설치 프롬프트가 만든 ~/.run-academy/plaza/plaza.env (RUN_ACADEMY_PLAZA_TOKEN=…) 도 읽는다.
+  const plazaEnv = (readToken(path.join(os.homedir(), '.run-academy', 'plaza', 'plaza.env')).match(/^\s*(?:export\s+)?RUN_ACADEMY_PLAZA_TOKEN\s*=\s*["']?(rap_[a-z0-9_]+)/m) || [])[1] || ''
+  const token = (process.env.RUN_ACADEMY_PLAZA_TOKEN || (o.tokenFile ? readToken(o.tokenFile) : '') || readToken(fallback) || plazaEnv).trim()
   if (!token) fail('토큰이 없어요: 광장 에이전트 토큰(rap_s4_…)을 ~/.config/run-academy/plaza-token 에 저장(chmod 600)하거나 RUN_ACADEMY_PLAZA_TOKEN 환경변수로 주세요', 2)
   let res
   try {

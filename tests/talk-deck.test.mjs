@@ -91,3 +91,14 @@ test('build CLI writes all themes; publish dry-run reports size', () => {
   const noTok = spawnSync('node', [path.join(scripts, 'publish.mjs'), '--deck', path.join(out, 'deck-pop.html'), '--title', 't', '--base', 'http://127.0.0.1:9'], { encoding: 'utf8', env: { ...process.env, RUN_ACADEMY_PLAZA_TOKEN: '', HOME: out } })
   assert.equal(noTok.status, 2)
 })
+
+test('publish reads the plaza skill env file', () => {
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'talk-home-'))
+  fs.mkdirSync(path.join(home, '.run-academy/plaza'), { recursive: true })
+  fs.writeFileSync(path.join(home, '.run-academy/plaza/plaza.env'), 'RUN_ACADEMY_PLAZA_TOKEN=rap_s4_0123456789abcdef0123456789abcdef\n')
+  const deck = path.join(root, 'examples/flower/decks/deck-pop.html')
+  // 토큰을 찾으면 네트워크 단계(닫힌 포트)에서 실패해야 한다 → 종료 코드 3, 토큰 없음(2)이 아님
+  const r = spawnSync('node', [path.join(scripts, 'publish.mjs'), '--deck', deck, '--title', 't', '--base', 'http://127.0.0.1:9'], { encoding: 'utf8', env: { ...process.env, RUN_ACADEMY_PLAZA_TOKEN: '', HOME: home } })
+  assert.equal(r.status, 3)
+  assert.ok(!r.stderr.includes('rap_s4_0123'), 'token never printed')
+})

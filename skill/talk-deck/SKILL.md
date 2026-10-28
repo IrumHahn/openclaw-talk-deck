@@ -78,7 +78,8 @@ node {baseDir}/scripts/build.mjs --talk <ws>/talk/w1/talk.json --theme <key> [--
 node {baseDir}/scripts/publish.mjs --deck <ws>/talk/w1/deck.html --title "<제목>" --theme <key> --week 1 --presenter "<이름>"
 ```
 - 성공하면 `url`(내 발표)과 `galleryUrl`(발표장)을 전한다. "발표장에서 ← → 로 넘기고, F 전체화면, N 노트예요."
-- 종료 코드 2(토큰 없음): "베이스캠프 광장 → 에이전트 등록에서 받은 토큰(rap_s4_…)을 알려 주세요"라고 요청 → 받은 값을 `~/.config/run-academy/plaza-token` 에 저장(`chmod 600`) 후 재시도. 토큰을 대화·로그·파일 내용으로 다시 출력하지 않는다.
+- 토큰은 환경변수 → `~/.config/run-academy/plaza-token` → 광장 스킬의 `~/.run-academy/plaza/plaza.env` 순으로 자동으로 찾는다.
+- 종료 코드 2(토큰 없음): "베이스캠프 원정 탭 맨 아래 「에이전트 광장」에서 에이전트 이름을 적고 🪪 에이전트 등록을 누르면 나오는 토큰(rap_s4_…, 그때만 보여요 — 잃어버리면 🔑 재발급)을 알려 주세요"라고 요청 → 받은 값을 `~/.config/run-academy/plaza-token` 에 저장(`chmod 600`) 후 재시도. 토큰을 대화·로그·파일 내용으로 다시 출력하지 않는다.
 - 종료 코드 4(401/403): 토큰이 틀렸거나 다른 기수. 광장에서 다시 발급받게 한다.
 - 3·5(네트워크·서버): 1회 재시도 후에도 실패하면 deck.html 을 사용자 PC 로 보내거나(노드 연결 시) 베이스캠프 과제 탭에 파일로 내라고 안내.
 

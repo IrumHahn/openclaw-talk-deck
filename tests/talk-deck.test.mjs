@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { execFileSync, spawnSync } from 'node:child_process'
+import { execFileSync, spawnSync, spawn } from 'node:child_process'
 import { renderDeck, buildSlides } from '../skill/talk-deck/scripts/lib/render.mjs'
 import { THEME_KEYS } from '../skill/talk-deck/scripts/lib/themes.mjs'
 import { parseWorkMap, dashboardMini, findFiles, draftTalk } from '../skill/talk-deck/scripts/collect.mjs'
@@ -129,4 +129,37 @@ test('new story slides appear in order and stay out when empty', () => {
   assert.deepEqual(keys.slice(-5), ['office', 'feelings', 'goal', 'pledge', 'closing'])
   const bare = buildSlides({ ...example, motivation: {}, goal: {}, pledge: {}, office: {} }).map(s => s.match(/data-key="([^"]+)"/)[1])
   assert.ok(!bare.some(k => ['motivation', 'goal', 'pledge', 'office'].includes(k)))
+})
+
+test('publish by name: sends name, saves edit key, reuses it next time; never prints it', async () => {
+  const http = await import('node:http')
+  const seen = []
+  const server = http.createServer((req, res) => {
+    let raw = ''; req.on('data', c => { raw += c }); req.on('end', () => {
+      const b = JSON.parse(raw); seen.push({ auth: req.headers.authorization || '', name: b.name, editKey: b.editKey })
+      res.setHeader('content-type', 'application/json')
+      res.end(JSON.stringify({ ok: true, url: 'u', galleryUrl: 'g', id: 'P010', ...(seen.length === 1 ? { editKey: 'tdk_' + 'f'.repeat(32) } : {}) }))
+    })
+  })
+  await new Promise(r => server.listen(0, '127.0.0.1', r))
+  const base = `http://127.0.0.1:${server.address().port}`
+  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'talk-name-'))
+  const deck = path.join(root, 'examples/flower/decks/deck-pop.html')
+  const run = args => new Promise(resolve => {
+    const p = spawn('node', [path.join(scripts, 'publish.mjs'), '--deck', deck, '--title', 't', '--base', base, ...args], { env: { ...process.env, RUN_ACADEMY_PLAZA_TOKEN: '', HOME: home } })
+    let out = ''; p.stdout.on('data', d => { out += d }); p.stderr.on('data', d => { out += d }); p.on('close', code => resolve({ code, out }))
+  })
+  const r1 = await run(['--name', '김하늘'])
+  assert.equal(r1.code, 0)
+  assert.ok(!r1.out.includes('tdk_'), 'edit key not printed')
+  const saved = JSON.parse(fs.readFileSync(path.join(home, '.config/run-academy/talk.json'), 'utf8'))
+  assert.equal(saved.s4.name, '김하늘')
+  assert.equal((fs.statSync(path.join(home, '.config/run-academy/talk.json')).mode & 0o777), 0o600)
+  const r2 = await run([])
+  assert.equal(r2.code, 0)
+  server.close()
+  assert.equal(seen[0].auth, '')
+  assert.equal(seen[0].editKey, undefined)
+  assert.equal(seen[1].name, '김하늘')
+  assert.equal(seen[1].editKey, 'tdk_' + 'f'.repeat(32))
 })

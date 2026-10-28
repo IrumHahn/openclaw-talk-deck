@@ -4,7 +4,7 @@ OpenClaw 비서에게 **"1주차 발표자료 만들어줘"** 한 문장 → 업
 
 ```
 VPS (OpenClaw)                                                         베이스캠프
-my-work-map.md ┐                                                       POST /api/talk-deck (광장 토큰 rap_s4_…)
+my-work-map.md ┐                                                       POST /api/talk-deck (명단 이름 + 수정 열쇠)
 team.json      ├→ collect.mjs → talk.json ─(사람 답)→ build.mjs → deck.html ─publish.mjs→ /s4/talks/ 발표장
 dashboard/*.json┘                                       테마 5종 · Pretendard          /s4/talks/view?w=1&id=…
 ```
@@ -41,7 +41,7 @@ openclaw skills list | grep talk-deck
 |---|---|
 | `collect.mjs [--root dir] --out talk.json` | 재료 탐색($OPENCLAW_WORKSPACE, ~/.openclaw/workspace, /data/.openclaw/workspace) → 초안 + `ask` 목록 |
 | `build.mjs --talk talk.json --theme key [--screenshot png] --out deck.html` | HTML 한 장. `--all-themes dir` 로 5종 동시. 비밀값 패턴이 있으면 거부 |
-| `publish.mjs --deck deck.html --title "…" --week 1 [--dry-run]` | 발표장 게시(같은 주차 덮어쓰기). 토큰: `RUN_ACADEMY_PLAZA_TOKEN` → `--token-file` → `~/.config/run-academy/plaza-token` |
+| `publish.mjs --deck deck.html --title "…" --week 1 --name 명단이름 [--dry-run]` | 발표장 게시(같은 주차 덮어쓰기). 베이스캠프 명단 이름으로 올리고, 처음 받은 수정 열쇠를 `~/.config/run-academy/talk.json` 에 저장해 다음부터 자동. 광장 토큰(rap_s4_…)이 있으면 그걸 우선 사용 |
 
 발표 화면: ← → / 스페이스 넘기기, F 전체화면, N 발표자 노트, 클릭·스와이프.
 덱은 외부 스크립트·저장소·네트워크를 쓰지 않는다(발표장 CSP 샌드박스에서 동작). 글꼴만 jsDelivr·Google Fonts 에서 받는다.
